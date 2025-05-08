@@ -46,7 +46,7 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 
 ## 🚀 Cara Menggunakan
 
-1. Mulai percakapan dengan bot: [@YourIslamicAgentBot](https://t.me/YourIslamicAgentBot)
+1. Mulai percakapan dengan bot yang sudah kamu buat
 2. Ketik `/start` untuk memulai dan melihat pesan sambutan
 3. Ketik `/help` untuk melihat panduan penggunaan lengkap
 4. Gunakan perintah yang tersedia atau tanyakan pertanyaan langsung
@@ -86,10 +86,14 @@ cd islamic-agent
 ```bash
 pip install -r requirements.txt
 ```
+3. Copy contoh .env
 
-3. Sesuaikan konfigurasi di `config/config.py`
+```bash
+cp .env.example .env
+```
+4. Sesuaikan konfigurasi di `.env`
 
-4. Jalankan bot:
+5. Jalankan bot:
 
 ```bash
 python main.py
