@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Doa Sebelum Makan",
+    "arabic": "بِسْمِ اللهِ",
+    "latin": "Bismillah",
+    "translation": "Dengan menyebut nama Allah",
+    "category": "daily"
+  },
+  {
+    "title": "Doa Setelah Makan",
+    "arabic": "اَلْحَمْدُ لِلّٰهِ الَّذِىْ اَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مِنَ الْمُسْلِمِيْنَ",
+    "latin": "Alhamdulillahil ladzii ath'amanaa wa saqoonaa wa ja'alnaa minal muslimiin",
+    "translation": "Segala puji bagi Allah yang telah memberi makan kami dan minuman kami, serta menjadikan kami sebagai orang-orang islam.",
+    "category": "daily"
+  },
+  {
+    "title": "Doa Sebelum Tidur",
+    "arabic": "بِسْمِكَ اللّٰهُمَّ اَحْيَا وَاَمُوْتُ",
+    "latin": "Bismikallaahumma ahyaa wa amuutu",
+    "translation": "Dengan nama-Mu ya Allah aku hidup dan aku mati",
+    "category": "daily"
+  },
+  {
+    "title": "Doa Bangun Tidur",
+    "arabic": "اَلْحَمْدُ لِلّٰهِ الَّذِىْ اَحْيَانَا بَعْدَ مَا اَمَاتَنَا وَاِلَيْهِ النُّشُوْرُ",
+    "latin": "Alhamdulillahil ladzii ahyaanaa ba'da maa amaa tanaa wa ilaihin nusyuur",
+    "translation": "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya kami dikembalikan.",
+    "category": "daily"
+  },
+  {
+    "title": "Doa Masuk Masjid",
+    "arabic": "اَللّٰهُمَّ افْتَحْ لِيْ اَبْوَابَ رَحْمَتِكَ",
+    "latin": "Allaahummaf tahlii abwaaba rohmatik",
+    "translation": "Ya Allah, bukalah untukku pintu-pintu rahmat-Mu",
+    "category": "worship"
+  },
+  {
+    "title": "Doa Keluar Masjid",
+    "arabic": "اَللّٰهُمَّ اِنِّى اَسْأَلُكَ مِنْ فَضْلِكَ",
+    "latin": "Allaahumma innii as-aluka min fadlik",
+    "translation": "Ya Allah, sesungguhnya aku memohon keutamaan dari-Mu",
+    "category": "worship"
+  },
+  {
+    "title": "Doa Mohon Ilmu Yang Bermanfaat",
+    "arabic": "اَللّٰهُمَّ اِنِّى اَسْأَلُكَ عِلْمًا نَافِعًا وَرِزْقًا طَيِّبًا وَعَمَلاً مُتَقَبَّلاً",
+    "latin": "Allaahumma innii as-aluka 'ilman naafi'an, wa rizqon thoyyiban, wa 'amalan mutaqobbalan",
+    "translation": "Ya Allah, sesungguhnya aku mohon kepada-Mu ilmu yang bermanfaat, rezeki yang baik, dan amalan yang diterima",
+    "category": "knowledge"
+  }
+]
