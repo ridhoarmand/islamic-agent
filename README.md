@@ -141,10 +141,6 @@ Kontribusi untuk pengembangan Islamic Agent sangat diterima! Jika Anda ingin ber
 
 Proyek ini dilisensikan di bawah Lisensi MIT - lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
 
-## 📬 Kontak
-
-Link Proyek: [https://github.com/ridhoarmand/islamic-agent](https://github.com/ridhoarmand/islamic-agent)
-
 ---
 
 Dibuat dengan ❤️ dan 🤲 untuk Umat Muslim
