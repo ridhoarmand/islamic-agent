@@ -1,7 +1,14 @@
-# LAPORAN PENGEMBANGAN ISLAMIC AGENT
+# <div align="center"> LAPORAN PENGEMBANGAN PROJECT ISLAMIC AGENT </div>
 
 <div align="center">
   <h2>UNIVERSITAS AMIKOM PURWOKERTO</h2>
+  <h2>MATA KULIAH AGENT</h2>
+  ![Universitas Amikom Purwokero](https://github.com/user-attachments/assets/be5c1a70-da6b-4204-a7d7-ded30c4161a1)
+  <h3>ANGGOTA KELOMPOK: </h3>
+  <h3>- 22SA11A033 - RIDHOARMANSYAH</h3>
+  <h3>- ⁠22SA11A172 - NOVA RAMADHAN</h3>
+  <h3>- 22SA11A213 - IGNAS SURYA GEMILANG</h3>
+  <h3>- 22SA11A268 - TRI ANTONO</h3>
   <h3>FAKULTAS ILMU KOMPUTER</h3>
   <h3>PROGRAM STUDI INFORMATIKA</h3>
   <br>
