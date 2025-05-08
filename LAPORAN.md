@@ -1,24 +1,32 @@
-# <div align="center"> LAPORAN PENGEMBANGAN PROJECT ISLAMIC AGENT </div>
+# 📘 Laporan Pengembangan Project Islamic Agent
 
-<div align="center">
-  <h2>UNIVERSITAS AMIKOM PURWOKERTO</h2>
-  <h2>MATA KULIAH AGENT</h2>
-  ![Universitas Amikom Purwokero](https://github.com/user-attachments/assets/be5c1a70-da6b-4204-a7d7-ded30c4161a1)
-  <h3>ANGGOTA KELOMPOK: </h3>
-  <h3>- 22SA11A033 - RIDHOARMANSYAH</h3>
-  <h3>- ⁠22SA11A172 - NOVA RAMADHAN</h3>
-  <h3>- 22SA11A213 - IGNAS SURYA GEMILANG</h3>
-  <h3>- 22SA11A268 - TRI ANTONO</h3>
-  <h3>FAKULTAS ILMU KOMPUTER</h3>
-  <h3>PROGRAM STUDI INFORMATIKA</h3>
-  <br>
-  <img src="https://img.shields.io/badge/Islamic-Agent-brightgreen" alt="Islamic Agent">
-  <br><br>
-  <h1>PENGEMBANGAN BOT TELEGRAM ISLAMIC AGENT</h1>
-  <h4>Laporan Project Agent AI</h4>
-</div>
+## Universitas Amikom Purwokerto  
+### Mata Kuliah: Agent  
 
-<br><br>
+<img src="https://github.com/user-attachments/assets/be5c1a70-da6b-4204-a7d7-ded30c4161a1" alt="Universitas Amikom Purwokerto" width="300"/>
+
+<br>
+
+### 👨‍💻 Anggota Kelompok:
+- **22SA11A033** - Ridho Armansyah  
+- **22SA11A172** - Nova Ramadhan  
+- **22SA11A213** - Ignas Surya Gemilang  
+- **22SA11A268** - Tri Antono  
+
+---
+
+### Fakultas Ilmu Komputer  
+### Program Studi Informatika  
+
+<br>
+
+<img src="https://img.shields.io/badge/Islamic-Agent-brightgreen" alt="Islamic Agent Badge"/>
+
+---
+
+## 🛠️ Pengembangan Bot Telegram Islamic Agent  
+### Laporan Project Agent AI
+
 
 ## DAFTAR ISI
 
