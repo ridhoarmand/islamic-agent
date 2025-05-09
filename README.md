@@ -1,5 +1,4 @@
 # 🌙 Islamic Agent - Asisten Virtual Islami Anda
-
 ![Islamic Agent](https://img.shields.io/badge/Islamic-Agent-brightgreen)
 ![Python](https://img.shields.io/badge/Made%20with-Python-blue)
 ![Telegram](https://img.shields.io/badge/Telegram-Bot-blue)
@@ -13,8 +12,9 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 ### 🕋 Jadwal Sholat
 
 - Dapatkan jadwal sholat untuk kota manapun di Indonesia
+- Pencarian lokasi cerdas dengan AI untuk menemukan kota berdasarkan daerah/wilayah
 - Berlangganan pengingat waktu sholat harian
-- Data akurat dari API Kemenag RI
+- Data akurat dari MyQuran API
 
 ### 📖 Al-Quran
 
@@ -24,9 +24,7 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 
 ### 📅 Kalender Hijriah
 
-- Konversi tanggal Masehi ke Hijriah
-- Informasi bulan Hijriah lengkap
-- Daftar hari-hari khusus Islam
+- Informasi kalender Hijriah
 
 ### 🤲 Doa-doa
 
@@ -86,11 +84,13 @@ cd islamic-agent
 ```bash
 pip install -r requirements.txt
 ```
+
 3. Copy contoh .env
 
 ```bash
 cp .env.example .env
 ```
+
 4. Sesuaikan konfigurasi di `.env`
 
 5. Jalankan bot:

@@ -186,6 +186,95 @@ class GeminiService:
             print(f"Error getting simple response from Gemini: {str(e)}")
             return "Error processing request"
             
+    async def get_json_response(self, prompt):
+        """
+        Generate a JSON response using the Gemini LLM.
+        This method specifically requests output in JSON format.
+        
+        Args:
+            prompt: The input prompt requesting JSON output
+            
+        Returns:
+            The parsed JSON object from the AI response or None if parsing fails
+        """
+        try:
+            import json
+            import re
+            
+            # Enhanced prompt to ensure JSON output
+            json_prompt = f"""
+            {prompt}
+            
+            IMPORTANT INSTRUCTION:
+            - You MUST respond ONLY with a valid JSON object
+            - Do NOT include any explanations, markdown formatting, or text outside the JSON
+            - Do NOT include ```json or ``` markers
+            - Ensure all keys and values are properly quoted and formatted
+            """
+            
+            # Create a chat session with JSON output requirement
+            chat = self.model.start_chat(history=[])
+            
+            # Set system instruction for JSON output
+            response = chat.send_message(json_prompt)
+            response_text = response.text
+            
+            # Try to parse as JSON - sometimes model will include markdown code block markers
+            try:
+                # Clean the response - remove markdown code blocks
+                if "```json" in response_text:
+                    response_text = response_text.split("```json")[1].split("```")[0].strip()
+                elif "```" in response_text:
+                    response_text = response_text.split("```")[1].strip()
+                
+                # Remove any non-JSON text before or after the JSON object
+                json_match = re.search(r'(\{.*\})', response_text, re.DOTALL)
+                if json_match:
+                    response_text = json_match.group(1)
+                
+                # Parse the JSON
+                json_data = json.loads(response_text)
+                return json_data
+                
+            except json.JSONDecodeError as e:
+                print(f"JSON parsing error: {str(e)}")
+                print(f"Raw response: {response_text}")
+                
+                # Retry with a more explicit request for proper JSON
+                try:
+                    retry_prompt = f"""
+                    I received an invalid JSON response. Please provide a VALID JSON object for the following request:
+                    
+                    {prompt}
+                    
+                    CRITICAL: Only output a properly formatted JSON object with no other text or explanation.
+                    """
+                    
+                    # Retry with more explicit instructions
+                    retry_response = chat.send_message(retry_prompt)
+                    retry_text = retry_response.text
+                    
+                    # Clean and parse the retry response
+                    if "```json" in retry_text:
+                        retry_text = retry_text.split("```json")[1].split("```")[0].strip()
+                    elif "```" in retry_text:
+                        retry_text = retry_text.split("```")[1].strip()
+                    
+                    # Extract JSON object pattern
+                    json_match = re.search(r'(\{.*\})', retry_text, re.DOTALL)
+                    if json_match:
+                        retry_text = json_match.group(1)
+                    
+                    return json.loads(retry_text)
+                    
+                except Exception:
+                    # If retry fails, return None
+                    return None
+                
+        except Exception as e:
+            print(f"Error generating JSON response from Gemini: {str(e)}")
+            return None
+            
     def set_thinking_mode(self, show_thinking):
         """
         Enable or disable thinking process display in responses.

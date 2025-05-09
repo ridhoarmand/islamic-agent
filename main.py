@@ -6,7 +6,7 @@ from handlers.command_handler import (
     start_command, help_command, sholat_command, quran_command, cari_ayat_command,
     doa_command, motivasi_command, motivasi_harian_command, subscribe_command, unsubscribe_command,
     kalender_command, bulan_command, konversi_tanggal_command, 
-    toggle_thinking_command, handle_message
+    toggle_thinking_command, my_subscriptions_command, handle_message
 )
 from services.scheduler_service import SchedulerService
 from utils.database import init_db
@@ -44,6 +44,7 @@ def main():
     application.add_handler(CommandHandler("konversi_tanggal", konversi_tanggal_command))
     application.add_handler(CommandHandler("subscribe", subscribe_command))
     application.add_handler(CommandHandler("unsubscribe", unsubscribe_command))
+    application.add_handler(CommandHandler("my_subscriptions", my_subscriptions_command))
     application.add_handler(CommandHandler("toggle_thinking", toggle_thinking_command))
     
     # Register message handler for chat with Gemini LLM

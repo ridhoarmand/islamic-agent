@@ -1,29 +1,54 @@
 import aiohttp
 from datetime import datetime
-from config.config import MUSLIM_API_BASE_URL
+from config.config import MUSLIM_API_BASE_URL, MYQURAN_API_BASE_URL
 
 class CalendarService:
     def __init__(self):
         # Gunakan base URL dari myQuran API
         self.api_url = MUSLIM_API_BASE_URL
+        self.myquran_api_url = MYQURAN_API_BASE_URL
     
     async def get_hijri_date(self):
         """
-        Mendapatkan tanggal Hijriah saat ini
+        Mendapatkan tanggal Hijriah saat ini menggunakan API MyQuran
         
         Returns:
             Dictionary berisi informasi tanggal Hijriah
         """
         try:
-            # Gunakan endpoint API baru untuk tanggal Hijriah saat ini: /cal/hijr/?adj=-1
+            # Dapatkan tanggal hari ini dalam format YYYY-MM-DD
+            today = datetime.now().strftime("%Y-%m-%d")
+            
+            # Gunakan endpoint API MyQuran untuk tanggal Hijriah saat ini: /cal/hijr/yyyy-mm-dd/adj=-1
             async with aiohttp.ClientSession() as session:
-                async with session.get(f"{self.api_url}/cal/hijr/?adj=-1") as response:
+                async with session.get(f"{self.myquran_api_url}/cal/hijr/{today}/adj=-1") as response:
                     if response.status == 200:
                         data = await response.json()
                         if data['status'] == True:
+                            # Format data hasil
+                            hijri_date_parts = data['data']['date'][1].split(' ')  # "16 Dzulhijjah 1445 H"
+                            hijri_day = hijri_date_parts[0]
+                            hijri_month = hijri_date_parts[1]
+                            hijri_year = hijri_date_parts[2]
+                            weekday = data['data']['date'][0]  # "Ahad"
+                            
+                            formatted_data = {
+                                'day': hijri_day,
+                                'month': {
+                                    'number': data['data']['num'][5],  # Nomor bulan Hijriah (1-12)
+                                    'indonesian': hijri_month,  # Nama bulan dalam Bahasa Indonesia
+                                    'english': hijri_month,     # Nama bulan dalam Bahasa Inggris (sama saja)
+                                },
+                                'year': hijri_year.replace(' H', ''),
+                                'weekday': {
+                                    'indonesian': weekday,
+                                    'english': self._convert_day_to_english(weekday)
+                                }
+                            }
+                            
                             return {
                                 'status': 'success',
-                                'data': data['data']
+                                'data': formatted_data
                             }
                         else:
                             return {'status': 'error', 'message': 'Gagal mendapatkan tanggal Hijriah'}
@@ -34,7 +59,7 @@ class CalendarService:
     
     async def convert_to_hijri(self, day, month, year):
         """
-        Mengkonversi tanggal masehi ke tanggal Hijriah
+        Mengkonversi tanggal masehi ke tanggal Hijriah menggunakan MyQuran API
         
         Args:
             day: Hari (1-31)
@@ -48,15 +73,36 @@ class CalendarService:
             # Format tanggal yyyy-mm-dd
             date_str = f"{year}-{month:02d}-{day:02d}"
             
-            # Gunakan endpoint API baru untuk konversi tanggal: /cal/hijr/:date?adj=-1
+            # Gunakan endpoint API MyQuran untuk konversi tanggal: /cal/hijr/yyyy-mm-dd/adj=-1
             async with aiohttp.ClientSession() as session:
-                async with session.get(f"{self.api_url}/cal/hijr/{date_str}?adj=-1") as response:
+                async with session.get(f"{self.myquran_api_url}/cal/hijr/{date_str}/adj=-1") as response:
                     if response.status == 200:
                         data = await response.json()
                         if data['status'] == True:
+                            # Format data hasil
+                            hijri_date_parts = data['data']['date'][1].split(' ')  # "16 Dzulhijjah 1445 H"
+                            hijri_day = hijri_date_parts[0]
+                            hijri_month = hijri_date_parts[1]
+                            hijri_year = hijri_date_parts[2]
+                            weekday = data['data']['date'][0]  # "Ahad"
+                            
+                            formatted_data = {
+                                'day': hijri_day,
+                                'month': {
+                                    'number': data['data']['num'][5],  # Nomor bulan Hijriah (1-12)
+                                    'indonesian': hijri_month,  # Nama bulan dalam Bahasa Indonesia
+                                    'english': hijri_month,     # Nama bulan dalam Bahasa Inggris (sama saja)
+                                },
+                                'year': hijri_year.replace(' H', ''),
+                                'weekday': {
+                                    'indonesian': weekday,
+                                    'english': self._convert_day_to_english(weekday)
+                                }
+                            }
+                            
                             return {
                                 'status': 'success',
-                                'data': data['data']
+                                'data': formatted_data
                             }
                         else:
                             return {'status': 'error', 'message': 'Gagal mengkonversi tanggal ke Hijriah'}
@@ -262,37 +308,37 @@ class CalendarService:
         
         data = hijri_data['data']
         
-        # Format baru berdasarkan API myquran.com:
-        # data.date[0] = nama hari (Senin, Selasa, dll)
-        # data.date[1] = tanggal hijriah lengkap (misalnya: "27 Syaban 1445 H")
-        # data.date[2] = tanggal masehi (format: dd-mm-yyyy)
-        
+        # Format baru berdasarkan API MyQuran yang telah diolah:
         message = f"📆 *Tanggal Hijriah Hari Ini*\n\n"
-        message += f"📅 Hari: {data['date'][0]}\n"
-        message += f"🌙 Hijriah: {data['date'][1]}\n"
-        message += f"📌 Masehi: {data['date'][2]}\n\n"
+        message += f"🌙 Hijriah: {data['day']} {data['month']['indonesian']} {data['year']} H\n"
+        message += f"📅 Hari: {data['weekday']['indonesian']}\n"
         
-        # Tambahan informasi dari array num
-        # num[0] = hari dalam seminggu (1=Ahad, 2=Senin, ..., 7=Sabtu)
-        # num[1] = tanggal masehi
-        # num[2] = bulan masehi
-        # num[3] = tahun masehi
-        # num[4] = tanggal hijriah
-        # num[5] = bulan hijriah
-        # num[6] = tahun hijriah
+        # Tambahkan tanggal Masehi hari ini
+        today = datetime.now().strftime("%d-%m-%Y")
+        message += f"📌 Masehi: {today}\n\n"
         
+        # Tambahkan detail bulan Hijriah
         hijri_month_names = [
             "", "Muharram", "Safar", "Rabiul Awal", "Rabiul Akhir", 
-            "Jumadil Awal", "Jumadil Akhir", "Rajab", "Syaban", 
-            "Ramadan", "Syawal", "Dzulkaidah", "Dzulhijjah"
+            "Jumadil Awal", "Jumadil Akhir", "Rajab", "Sya'ban", 
+            "Ramadhan", "Syawal", "Zulkaidah", "Dzulhijjah"
         ]
         
-        hijri_month_name = hijri_month_names[data['num'][5]] if data['num'][5] <= 12 else "Unknown"
+        hijri_month_number = data['month']['number']
+        hijri_month_name = hijri_month_names[hijri_month_number] if 1 <= hijri_month_number <= 12 else "Unknown"
         
-        message += f"Detail:\n"
-        message += f"📆 Tanggal Hijriah: {data['num'][4]}\n"
-        message += f"📅 Bulan Hijriah: {data['num'][5]} ({hijri_month_name})\n"
-        message += f"📆 Tahun Hijriah: {data['num'][6]}\n"
+        message += f"ℹ️ *Detail Bulan Hijriah:*\n"
+        message += f"📆 Bulan: {hijri_month_number} - {hijri_month_name}\n"
+        
+        # Tambahkan informasi tentang keutamaan bulan jika tersedia
+        if hijri_month_number == 9:
+            message += f"\n✨ *Bulan Ramadhan* - Bulan suci di mana diwajibkan puasa dan diturunkannya Al-Qur'an."
+        elif hijri_month_number == 12:
+            message += f"\n✨ *Bulan Dzulhijjah* - Bulan ibadah haji dan berisi 10 hari pertama yang mulia."
+        elif hijri_month_number == 1:
+            message += f"\n✨ *Bulan Muharram* - Salah satu bulan yang dimuliakan, berisi hari Asyura (10 Muharram)."
+        elif hijri_month_number == 7:
+            message += f"\n✨ *Bulan Rajab* - Salah satu bulan yang dimuliakan dan bulan terjadinya Isra' Mi'raj."
                 
         return message
         
@@ -376,3 +422,35 @@ class CalendarService:
             message += f"ℹ️ *Tentang Bulan Ini:*\n{month_significance[month_number]}\n\n"
         
         return message
+
+    def _convert_day_to_english(self, indonesian_day):
+        """
+        Mengkonversi nama hari dari Bahasa Indonesia ke Bahasa Inggris
+        
+        Args:
+            indonesian_day: Nama hari dalam Bahasa Indonesia
+            
+        Returns:
+            Nama hari dalam Bahasa Inggris
+        """
+        day_mapping = {
+            'Senin': 'Monday',
+            'Selasa': 'Tuesday',
+            'Rabu': 'Wednesday',
+            'Kamis': 'Thursday',
+            'Jumat': 'Friday',
+            'Jum\'at': 'Friday',
+            'Sabtu': 'Saturday',
+            'Ahad': 'Sunday',
+            'Minggu': 'Sunday',
+            # Format khusus dari API MyQuran
+            'Isnain': 'Monday',
+            'Tsulasa': 'Tuesday',
+            'Arba\'a': 'Wednesday',
+            'Khamis': 'Thursday',
+            'Jumu\'ah': 'Friday',
+            'Sabt': 'Saturday',
+            'Ahaad': 'Sunday',
+        }
+        
+        return day_mapping.get(indonesian_day, indonesian_day)

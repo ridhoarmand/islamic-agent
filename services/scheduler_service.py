@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from telegram import Bot
 from services.prayer_service import PrayerService
 from services.quote_service import QuoteService
+from services.gemini_service import GeminiService
 from utils.database import get_subscribers
 from config.config import TELEGRAM_BOT_TOKEN
 
@@ -13,14 +14,24 @@ class SchedulerService:
     def __init__(self):
         self.prayer_service = PrayerService()
         self.quote_service = QuoteService()
+        self.gemini_service = GeminiService()
         self.bot = Bot(token=TELEGRAM_BOT_TOKEN)
         self._stop_event = threading.Event()
         self._thread = None
     
-    async def _send_prayer_notification(self, user_id, chat_id, city, country):
+    async def _send_prayer_notification(self, user_id, chat_id, city, country, city_id=None):
         """Send prayer time notification to a user."""
         try:
-            prayer_data = await self.prayer_service.get_prayer_times(city, country)
+            # Use city_id if available (from MyQuran API), otherwise use city name
+            location = city_id if city_id else city
+            
+            # Gunakan gemini_service untuk pencarian kota cerdas
+            prayer_data = await self.prayer_service.get_prayer_times(
+                location, 
+                country, 
+                gemini_service=self.gemini_service
+            )
+            
             if prayer_data['status'] == 'success':
                 # Format message with only the next prayer time
                 current_time = datetime.now().strftime("%H:%M")
@@ -43,8 +54,16 @@ class SchedulerService:
                     }
                     
                     message = f"⏰ *Pengingat Waktu Sholat*\n\n"
+                    
+                    # Jika penggunaan pencarian cerdas mengganti kota, berikan informasi
+                    if 'smart_search' in prayer_data:
+                        actual_city = prayer_data['meta']['city']
+                        original_query = prayer_data['smart_search']['original_query']
+                        message += f"ℹ️ Lokasi langganan Anda: *{original_query}*\n"
+                        message += f"✅ Terjadwal untuk: *{actual_city}*\n\n"
+                    
                     message += f"Sekarang pukul {current_time}\n"
-                    message += f"Waktu sholat {prayer_names[next_prayer]} di {city}, {country} adalah pukul {next_prayer_time}\n\n"
+                    message += f"Waktu sholat {prayer_names[next_prayer]} di {prayer_data['meta']['city']}, {country} adalah pukul {next_prayer_time}\n\n"
                     
                     # Calculate time remaining
                     current_hour, current_minute = map(int, current_time.split(':'))
@@ -94,9 +113,16 @@ class SchedulerService:
         
         # Check and send prayer time notifications every hour
         prayer_subscribers = get_subscribers("prayer")
-        for user_id, chat_id, city, country in prayer_subscribers:
+        for subscriber in prayer_subscribers:
+            # Handle both legacy format (4 columns) and new format (5 columns with city_id)
+            user_id = subscriber[0]
+            chat_id = subscriber[1]
+            city = subscriber[2]
+            country = subscriber[3]
+            city_id = subscriber[4] if len(subscriber) >= 5 else None
+            
             if city and country:
-                loop.run_until_complete(self._send_prayer_notification(user_id, chat_id, city, country))
+                loop.run_until_complete(self._send_prayer_notification(user_id, chat_id, city, country, city_id))
     
     def _run_scheduler(self):
         """Run the scheduler in a separate thread."""

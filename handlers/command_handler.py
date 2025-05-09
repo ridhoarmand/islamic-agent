@@ -8,6 +8,8 @@ from services.gemini_service import GeminiService
 from services.calendar_service import CalendarService
 from utils.database import save_user, save_chat_history, get_recent_chat_history, subscribe_to_service, unsubscribe_from_service
 import re
+import sqlite3
+from config.config import DATABASE_PATH
 
 def sanitize_markdown(text):
     """
@@ -95,8 +97,9 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "/help - Menampilkan panduan ini\n\n"
         
         "🔹 *Jadwal Sholat:*\n"
-        "/sholat [kota] - Mendapatkan jadwal sholat\n"
-        "Contoh: /sholat Jakarta atau /sholat 1301 (ID kota)\n\n"
+        "/sholat [kota/daerah] - Mendapatkan jadwal sholat\n"
+        "Contoh: /sholat Jakarta, /sholat 1301 (ID kota), /sholat Cisarua\n"
+        "Bot akan cerdas mengenali kota terdekat dari daerah yang Anda sebutkan\n\n"
         
         "🔹 *Kalender Hijriah:*\n"
         "/kalender - Melihat tanggal Hijriah hari ini\n"
@@ -134,7 +137,8 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "🔹 *Berlangganan:*\n"
         "/subscribe sholat [kota] - Berlangganan notifikasi jadwal sholat\n"
         "/subscribe motivasi\\_harian - Berlangganan kata motivasi islami harian\n"
-        "/unsubscribe [layanan] - Berhenti berlangganan\n\n"
+        "/unsubscribe [layanan] - Berhenti berlangganan\n"
+        "/my\\_subscriptions - Melihat semua langganan aktif Anda\n\n"
         
         "🔹 *Tanya Jawab:*\n"
         "Anda juga dapat mengirimkan pertanyaan langsung tentang Islam, dan saya akan mencoba menjawabnya dengan bantuan Gemini AI.\n"
@@ -164,26 +168,26 @@ async def sholat_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
             "Silakan berikan nama kota atau ID kota. Contoh:\n"
             "- `/sholat Jakarta` untuk mencari berdasarkan nama\n"
             "- `/sholat 1301` untuk mencari berdasarkan ID kota\n"
-            "\nCatatan: API Kemenag hanya mendukung kota-kota di Indonesia.", 
+            "- `/sholat Tangerang Selatan` untuk area/daerah\n"
+            "\nCatatan: Jadwal sholat hanya tersedia untuk wilayah di Indonesia.", 
             parse_mode='Markdown'
         )
         return
     
-    city = args[0]
-    # Untuk kompatibilitas dengan kode lama, kita masih menerima parameter negara
-    # tapi tidak digunakan dalam API Kemenag
-    country = args[1] if len(args) > 1 else "Indonesia"
+    city = ' '.join(args)  # Join all args to handle multi-word city names
+    country = "Indonesia"  # API Kemenag hanya untuk Indonesia
     
     # Save user info
     user = update.effective_user
     save_user(user.id, user.first_name, user.last_name, user.username, update.effective_chat.id)
     
-    await update.message.reply_text(f"Mengambil jadwal sholat untuk {city}...")
+    await update.message.reply_text(f"Mencari jadwal sholat untuk '{city}'...")
     
-    prayer_data = await prayer_service.get_prayer_times(city, country)
+    # Gunakan gemini_service untuk pencarian kota cerdas
+    prayer_data = await prayer_service.get_prayer_times(city, country, gemini_service=gemini_service)
     formatted_prayer_times = prayer_service.format_prayer_times(prayer_data)
     
-    await update.message.reply_text(formatted_prayer_times)
+    await update.message.reply_text(formatted_prayer_times, parse_mode='Markdown')
     
 async def quran_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle the /quran command to get Quranic verses with flexible query interpretation."""
@@ -347,25 +351,72 @@ async def subscribe_command(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if subscription_type == "sholat":
         if len(args) < 2:
             await update.message.reply_text(
-                "Silakan berikan nama kota. Contoh: `/subscribe sholat Jakarta`", 
+                "Silakan berikan nama kota atau ID kota. Contoh:\n"
+                "- `/subscribe sholat Jakarta` untuk berlangganan jadwal sholat Jakarta\n"
+                "- `/subscribe sholat 1301` untuk berlangganan dengan ID kota\n"
+                "- `/subscribe sholat Depok Timur` untuk area/daerah\n"
+                "\nCatatan: Jadwal sholat hanya tersedia untuk wilayah di Indonesia.", 
                 parse_mode='Markdown'
             )
             return
             
-        city = args[1]
+        city = ' '.join(args[1:])  # Join all remaining args for multi-word city names
         country = "Indonesia"  # API Kemenag hanya untuk Indonesia
         
-        subscribe_to_service(user.id, "prayer", city, country)
-        await update.message.reply_text(
-            f"Anda telah berlangganan notifikasi jadwal sholat untuk {city}. "
-            "Anda akan menerima pengingat untuk setiap waktu sholat.",
-            parse_mode='Markdown'
-        )
+        # Verifikasi kota tersedia sebelum mendaftarkan
+        try:
+            await update.message.reply_text(f"Mencari lokasi '{city}'...")
+            
+            # Gunakan gemini_service untuk pencarian kota cerdas
+            prayer_data = await prayer_service.get_prayer_times(city, country, gemini_service=gemini_service)
+            
+            if prayer_data['status'] == 'error':
+                await update.message.reply_text(
+                    f"Maaf, terjadi kesalahan: {prayer_data['message']}\n"
+                    f"Silakan coba kota lain atau gunakan ID kota.",
+                    parse_mode='Markdown'
+                )
+                return
+                
+            # Jika sukses, dapatkan nama kota yang benar dari hasil API
+            actual_city = prayer_data['meta']['city']
+            
+            message = f"✅ Berhasil menemukan lokasi: *{actual_city}, {country}*\n\n"
+            
+            # Jika menggunakan pencarian cerdas, tampilkan info tambahan
+            if 'smart_search' in prayer_data:
+                message += f"ℹ️ Anda mencari: *{prayer_data['smart_search']['original_query']}*\n"
+                message += f"✅ Ditemukan sebagai: *{actual_city}*\n\n"
+            
+            # Perbarui atau buat langganan dengan nama kota yang benar dari API
+            from utils.database import update_prayer_subscription
+            status = update_prayer_subscription(
+                user_id=user.id, 
+                city=actual_city, 
+                country=country, 
+                city_id=prayer_data['meta'].get('id', '')  # Simpan juga ID kota untuk API MyQuran
+            )
+            
+            if status == "updated":
+                message += f"🔄 Langganan jadwal sholat Anda telah diperbarui ke *{actual_city}*.\n"
+            else:
+                message += f"🔔 Anda telah berlangganan notifikasi jadwal sholat untuk *{actual_city}*.\n"
+            
+            message += f"Anda akan menerima pengingat untuk setiap waktu sholat berikutnya setiap jam."
+            
+            await update.message.reply_text(message, parse_mode='Markdown')
+            
+        except Exception as e:
+            await update.message.reply_text(
+                f"Maaf, terjadi kesalahan saat memverifikasi kota: {str(e)}\n"
+                f"Silakan coba lagi nanti atau gunakan kota lain.",
+                parse_mode='Markdown'
+            )
     
     elif subscription_type == "motivasi_harian":
         subscribe_to_service(user.id, "daily_quote")
         await update.message.reply_text(
-            "Anda telah berlangganan kata motivasi islami harian. "
+            "✅ Anda telah berlangganan kata motivasi islami harian.\n"
             "Anda akan menerima sebuah kata motivasi islami setiap hari.",
             parse_mode='Markdown'
         )
@@ -590,6 +641,7 @@ async def konversi_tanggal_command(update: Update, context: ContextTypes.DEFAULT
     message = f"📅 *Hasil Konversi Tanggal*\n\n"
     message += f"📌 Masehi: {day}/{month}/{year}\n"
     message += f"🌙 Hijriah: {data['day']} {data['month']['indonesian']} {data['year']} H\n"
+    message += f"📆 Hari: {data['weekday']['indonesian']}\n"
     
     # Tambahkan informasi hari spesial jika ada
     if 'is_special_day' in data and data['is_special_day']:
@@ -629,3 +681,46 @@ async def toggle_thinking_command(update: Update, context: ContextTypes.DEFAULT_
         f"Anda dapat mengaktifkan/menonaktifkan mode ini kapan saja dengan perintah `/toggle_thinking`",
         parse_mode='Markdown'
     )
+
+async def my_subscriptions_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Menampilkan daftar langganan aktif untuk pengguna."""
+    user = update.effective_user
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+
+    # Ambil semua langganan aktif untuk pengguna
+    cursor.execute('''
+    SELECT subscription_type, city, country, created_at
+    FROM subscriptions
+    WHERE user_id = ? AND active = 1
+    ORDER BY subscription_type
+    ''', (user.id,))
+    
+    subscriptions = cursor.fetchall()
+    conn.close()
+    
+    if not subscriptions:
+        await update.message.reply_text(
+            "Anda belum berlangganan layanan apapun. Gunakan `/subscribe` untuk mulai berlangganan.",
+            parse_mode='Markdown'
+        )
+        return
+    
+    message = "🔔 *Langganan Aktif Anda* 🔔\n\n"
+    
+    for sub in subscriptions:
+        sub_type, city, country, created_at = sub
+        if sub_type == "prayer":
+            message += f"📌 *Jadwal Sholat*\n"
+            message += f"📍 Lokasi: *{city}, {country}*\n"
+            message += f"⏰ Berlangganan sejak: {created_at}\n\n"
+        elif sub_type == "daily_quote":
+            message += f"📌 *Motivasi Harian*\n"
+            message += f"⏰ Berlangganan sejak: {created_at}\n\n"
+    
+    message += "ℹ️ *Cara Mengelola Langganan*\n"
+    message += "• `/unsubscribe sholat` - Berhenti langganan jadwal sholat\n"
+    message += "• `/unsubscribe motivasi_harian` - Berhenti langganan motivasi harian\n"
+    message += "• `/subscribe sholat [kota]` - Ganti lokasi jadwal sholat"
+    
+    await update.message.reply_text(message, parse_mode='Markdown')

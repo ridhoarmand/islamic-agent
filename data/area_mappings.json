@@ -1,0 +1,2121 @@
+{
+  "mappings": {
+    "kab. lampung tengah": {
+      "id": "1001",
+      "name": "KAB. LAMPUNG TENGAH"
+    },
+    "kab. lampung utara": {
+      "id": "1002",
+      "name": "KAB. LAMPUNG UTARA"
+    },
+    "kab. lampung selatan": {
+      "id": "1003",
+      "name": "KAB. LAMPUNG SELATAN"
+    },
+    "kab. lampung barat": {
+      "id": "1004",
+      "name": "KAB. LAMPUNG BARAT"
+    },
+    "kab. lampung timur": {
+      "id": "1005",
+      "name": "KAB. LAMPUNG TIMUR"
+    },
+    "kab. mesuji": {
+      "id": "1006",
+      "name": "KAB. MESUJI"
+    },
+    "kab. pesawaran": {
+      "id": "1007",
+      "name": "KAB. PESAWARAN"
+    },
+    "kab. pesisir barat": {
+      "id": "1008",
+      "name": "KAB. PESISIR BARAT"
+    },
+    "kab. pringsewu": {
+      "id": "1009",
+      "name": "KAB. PRINGSEWU"
+    },
+    "kab. tulang bawang": {
+      "id": "1010",
+      "name": "KAB. TULANG BAWANG"
+    },
+    "kab. tulang bawang barat": {
+      "id": "1011",
+      "name": "KAB. TULANG BAWANG BARAT"
+    },
+    "kab. tanggamus": {
+      "id": "1012",
+      "name": "KAB. TANGGAMUS"
+    },
+    "kab. way kanan": {
+      "id": "1013",
+      "name": "KAB. WAY KANAN"
+    },
+    "kota bandar lampung": {
+      "id": "1014",
+      "name": "KOTA BANDAR LAMPUNG"
+    },
+    "kota metro": {
+      "id": "1015",
+      "name": "KOTA METRO"
+    },
+    "kab. lebak": {
+      "id": "1101",
+      "name": "KAB. LEBAK"
+    },
+    "kab. pandeglang": {
+      "id": "1102",
+      "name": "KAB. PANDEGLANG"
+    },
+    "kab. serang": {
+      "id": "1103",
+      "name": "KAB. SERANG"
+    },
+    "kab. tangerang": {
+      "id": "1104",
+      "name": "KAB. TANGERANG"
+    },
+    "kota cilegon": {
+      "id": "1105",
+      "name": "KOTA CILEGON"
+    },
+    "kota serang": {
+      "id": "1106",
+      "name": "KOTA SERANG"
+    },
+    "kota tangerang": {
+      "id": "1107",
+      "name": "KOTA TANGERANG"
+    },
+    "kota tangerang selatan": {
+      "id": "1108",
+      "name": "KOTA TANGERANG SELATAN"
+    },
+    "kab. bandung": {
+      "id": "1201",
+      "name": "KAB. BANDUNG"
+    },
+    "kab. bandung barat": {
+      "id": "1202",
+      "name": "KAB. BANDUNG BARAT"
+    },
+    "kab. bekasi": {
+      "id": "1203",
+      "name": "KAB. BEKASI"
+    },
+    "kab. bogor": {
+      "id": "1204",
+      "name": "KAB. BOGOR"
+    },
+    "kab. ciamis": {
+      "id": "1205",
+      "name": "KAB. CIAMIS"
+    },
+    "kab. cianjur": {
+      "id": "1206",
+      "name": "KAB. CIANJUR"
+    },
+    "kab. cirebon": {
+      "id": "1207",
+      "name": "KAB. CIREBON"
+    },
+    "kab. garut": {
+      "id": "1208",
+      "name": "KAB. GARUT"
+    },
+    "kab. indramayu": {
+      "id": "1209",
+      "name": "KAB. INDRAMAYU"
+    },
+    "kab. karawang": {
+      "id": "1210",
+      "name": "KAB. KARAWANG"
+    },
+    "kab. kuningan": {
+      "id": "1211",
+      "name": "KAB. KUNINGAN"
+    },
+    "kab. majalengka": {
+      "id": "1212",
+      "name": "KAB. MAJALENGKA"
+    },
+    "kab. pangandaran": {
+      "id": "1213",
+      "name": "KAB. PANGANDARAN"
+    },
+    "kab. purwakarta": {
+      "id": "1214",
+      "name": "KAB. PURWAKARTA"
+    },
+    "kab. subang": {
+      "id": "1215",
+      "name": "KAB. SUBANG"
+    },
+    "kab. sukabumi": {
+      "id": "1216",
+      "name": "KAB. SUKABUMI"
+    },
+    "kab. sumedang": {
+      "id": "1217",
+      "name": "KAB. SUMEDANG"
+    },
+    "kab. tasikmalaya": {
+      "id": "1218",
+      "name": "KAB. TASIKMALAYA"
+    },
+    "kota bandung": {
+      "id": "1219",
+      "name": "KOTA BANDUNG"
+    },
+    "kota banjar": {
+      "id": "1220",
+      "name": "KOTA BANJAR"
+    },
+    "kota bekasi": {
+      "id": "1221",
+      "name": "KOTA BEKASI"
+    },
+    "kota bogor": {
+      "id": "1222",
+      "name": "KOTA BOGOR"
+    },
+    "kota cimahi": {
+      "id": "1223",
+      "name": "KOTA CIMAHI"
+    },
+    "kota cirebon": {
+      "id": "1224",
+      "name": "KOTA CIREBON"
+    },
+    "kota depok": {
+      "id": "1225",
+      "name": "KOTA DEPOK"
+    },
+    "kota sukabumi": {
+      "id": "1226",
+      "name": "KOTA SUKABUMI"
+    },
+    "kota tasikmalaya": {
+      "id": "1227",
+      "name": "KOTA TASIKMALAYA"
+    },
+    "kota jakarta": {
+      "id": "1301",
+      "name": "KOTA JAKARTA"
+    },
+    "kab. kepulauan seribu": {
+      "id": "1302",
+      "name": "KAB. KEPULAUAN SERIBU"
+    },
+    "kab. banjarnegara": {
+      "id": "1401",
+      "name": "KAB. BANJARNEGARA"
+    },
+    "kab. banyumas": {
+      "id": "1402",
+      "name": "KAB. BANYUMAS"
+    },
+    "kab. batang": {
+      "id": "1403",
+      "name": "KAB. BATANG"
+    },
+    "kab. blora": {
+      "id": "1404",
+      "name": "KAB. BLORA"
+    },
+    "kab. boyolali": {
+      "id": "1405",
+      "name": "KAB. BOYOLALI"
+    },
+    "kab. brebes": {
+      "id": "1406",
+      "name": "KAB. BREBES"
+    },
+    "kab. cilacap": {
+      "id": "1407",
+      "name": "KAB. CILACAP"
+    },
+    "kab. demak": {
+      "id": "1408",
+      "name": "KAB. DEMAK"
+    },
+    "kab. grobogan": {
+      "id": "1409",
+      "name": "KAB. GROBOGAN"
+    },
+    "kab. jepara": {
+      "id": "1410",
+      "name": "KAB. JEPARA"
+    },
+    "kab. karanganyar": {
+      "id": "1411",
+      "name": "KAB. KARANGANYAR"
+    },
+    "kab. kebumen": {
+      "id": "1412",
+      "name": "KAB. KEBUMEN"
+    },
+    "kab. kendal": {
+      "id": "1413",
+      "name": "KAB. KENDAL"
+    },
+    "kab. klaten": {
+      "id": "1414",
+      "name": "KAB. KLATEN"
+    },
+    "kab. kudus": {
+      "id": "1415",
+      "name": "KAB. KUDUS"
+    },
+    "kab. magelang": {
+      "id": "1416",
+      "name": "KAB. MAGELANG"
+    },
+    "kab. pati": {
+      "id": "1417",
+      "name": "KAB. PATI"
+    },
+    "kab. pekalongan": {
+      "id": "1418",
+      "name": "KAB. PEKALONGAN"
+    },
+    "kab. pemalang": {
+      "id": "1419",
+      "name": "KAB. PEMALANG"
+    },
+    "kab. purbalingga": {
+      "id": "1420",
+      "name": "KAB. PURBALINGGA"
+    },
+    "kab. purworejo": {
+      "id": "1421",
+      "name": "KAB. PURWOREJO"
+    },
+    "kab. rembang": {
+      "id": "1422",
+      "name": "KAB. REMBANG"
+    },
+    "kab. semarang": {
+      "id": "1423",
+      "name": "KAB. SEMARANG"
+    },
+    "kab. sragen": {
+      "id": "1424",
+      "name": "KAB. SRAGEN"
+    },
+    "kab. sukoharjo": {
+      "id": "1425",
+      "name": "KAB. SUKOHARJO"
+    },
+    "kab. tegal": {
+      "id": "1426",
+      "name": "KAB. TEGAL"
+    },
+    "kab. temanggung": {
+      "id": "1427",
+      "name": "KAB. TEMANGGUNG"
+    },
+    "kab. wonogiri": {
+      "id": "1428",
+      "name": "KAB. WONOGIRI"
+    },
+    "kab. wonosobo": {
+      "id": "1429",
+      "name": "KAB. WONOSOBO"
+    },
+    "kota magelang": {
+      "id": "1430",
+      "name": "KOTA MAGELANG"
+    },
+    "kota pekalongan": {
+      "id": "1431",
+      "name": "KOTA PEKALONGAN"
+    },
+    "kota salatiga": {
+      "id": "1432",
+      "name": "KOTA SALATIGA"
+    },
+    "kota semarang": {
+      "id": "1433",
+      "name": "KOTA SEMARANG"
+    },
+    "kota surakarta": {
+      "id": "1434",
+      "name": "KOTA SURAKARTA"
+    },
+    "kota tegal": {
+      "id": "1435",
+      "name": "KOTA TEGAL"
+    },
+    "kab. bantul": {
+      "id": "1501",
+      "name": "KAB. BANTUL"
+    },
+    "kab. gunungkidul": {
+      "id": "1502",
+      "name": "KAB. GUNUNGKIDUL"
+    },
+    "kab. kulon progo": {
+      "id": "1503",
+      "name": "KAB. KULON PROGO"
+    },
+    "kab. sleman": {
+      "id": "1504",
+      "name": "KAB. SLEMAN"
+    },
+    "kota yogyakarta": {
+      "id": "1505",
+      "name": "KOTA YOGYAKARTA"
+    },
+    "kab. bangkalan": {
+      "id": "1601",
+      "name": "KAB. BANGKALAN"
+    },
+    "kab. banyuwangi": {
+      "id": "1602",
+      "name": "KAB. BANYUWANGI"
+    },
+    "kab. blitar": {
+      "id": "1603",
+      "name": "KAB. BLITAR"
+    },
+    "kab. bojonegoro": {
+      "id": "1604",
+      "name": "KAB. BOJONEGORO"
+    },
+    "kab. bondowoso": {
+      "id": "1605",
+      "name": "KAB. BONDOWOSO"
+    },
+    "kab. gresik": {
+      "id": "1606",
+      "name": "KAB. GRESIK"
+    },
+    "kab. jember": {
+      "id": "1607",
+      "name": "KAB. JEMBER"
+    },
+    "kab. jombang": {
+      "id": "1608",
+      "name": "KAB. JOMBANG"
+    },
+    "kab. kediri": {
+      "id": "1609",
+      "name": "KAB. KEDIRI"
+    },
+    "kab. lamongan": {
+      "id": "1610",
+      "name": "KAB. LAMONGAN"
+    },
+    "kab. lumajang": {
+      "id": "1611",
+      "name": "KAB. LUMAJANG"
+    },
+    "kab. madiun": {
+      "id": "1612",
+      "name": "KAB. MADIUN"
+    },
+    "kab. magetan": {
+      "id": "1613",
+      "name": "KAB. MAGETAN"
+    },
+    "kab. malang": {
+      "id": "1614",
+      "name": "KAB. MALANG"
+    },
+    "kab. mojokerto": {
+      "id": "1615",
+      "name": "KAB. MOJOKERTO"
+    },
+    "kab. nganjuk": {
+      "id": "1616",
+      "name": "KAB. NGANJUK"
+    },
+    "kab. ngawi": {
+      "id": "1617",
+      "name": "KAB. NGAWI"
+    },
+    "kab. pacitan": {
+      "id": "1618",
+      "name": "KAB. PACITAN"
+    },
+    "kab. pamekasan": {
+      "id": "1619",
+      "name": "KAB. PAMEKASAN"
+    },
+    "kab. pasuruan": {
+      "id": "1620",
+      "name": "KAB. PASURUAN"
+    },
+    "kab. ponorogo": {
+      "id": "1621",
+      "name": "KAB. PONOROGO"
+    },
+    "kab. probolinggo": {
+      "id": "1622",
+      "name": "KAB. PROBOLINGGO"
+    },
+    "kab. sampang": {
+      "id": "1623",
+      "name": "KAB. SAMPANG"
+    },
+    "kab. sidoarjo": {
+      "id": "1624",
+      "name": "KAB. SIDOARJO"
+    },
+    "kab. situbondo": {
+      "id": "1625",
+      "name": "KAB. SITUBONDO"
+    },
+    "kab. sumenep": {
+      "id": "1626",
+      "name": "KAB. SUMENEP"
+    },
+    "kab. trenggalek": {
+      "id": "1627",
+      "name": "KAB. TRENGGALEK"
+    },
+    "kab. tuban": {
+      "id": "1628",
+      "name": "KAB. TUBAN"
+    },
+    "kab. tulungagung": {
+      "id": "1629",
+      "name": "KAB. TULUNGAGUNG"
+    },
+    "kota batu": {
+      "id": "1630",
+      "name": "KOTA BATU"
+    },
+    "kota blitar": {
+      "id": "1631",
+      "name": "KOTA BLITAR"
+    },
+    "kota kediri": {
+      "id": "1632",
+      "name": "KOTA KEDIRI"
+    },
+    "kota madiun": {
+      "id": "1633",
+      "name": "KOTA MADIUN"
+    },
+    "kota malang": {
+      "id": "1634",
+      "name": "KOTA MALANG"
+    },
+    "kota mojokerto": {
+      "id": "1635",
+      "name": "KOTA MOJOKERTO"
+    },
+    "kota pasuruan": {
+      "id": "1636",
+      "name": "KOTA PASURUAN"
+    },
+    "kota probolinggo": {
+      "id": "1637",
+      "name": "KOTA PROBOLINGGO"
+    },
+    "kota surabaya": {
+      "id": "1638",
+      "name": "KOTA SURABAYA"
+    },
+    "kab. badung": {
+      "id": "1701",
+      "name": "KAB. BADUNG"
+    },
+    "kab. bangli": {
+      "id": "1702",
+      "name": "KAB. BANGLI"
+    },
+    "kab. buleleng": {
+      "id": "1703",
+      "name": "KAB. BULELENG"
+    },
+    "kab. gianyar": {
+      "id": "1704",
+      "name": "KAB. GIANYAR"
+    },
+    "kab. jembrana": {
+      "id": "1705",
+      "name": "KAB. JEMBRANA"
+    },
+    "kab. karangasem": {
+      "id": "1706",
+      "name": "KAB. KARANGASEM"
+    },
+    "kab. klungkung": {
+      "id": "1707",
+      "name": "KAB. KLUNGKUNG"
+    },
+    "kab. tabanan": {
+      "id": "1708",
+      "name": "KAB. TABANAN"
+    },
+    "kota denpasar": {
+      "id": "1709",
+      "name": "KOTA DENPASAR"
+    },
+    "kab. bima": {
+      "id": "1801",
+      "name": "KAB. BIMA"
+    },
+    "kab. dompu": {
+      "id": "1802",
+      "name": "KAB. DOMPU"
+    },
+    "kab. lombok barat": {
+      "id": "1803",
+      "name": "KAB. LOMBOK BARAT"
+    },
+    "kab. lombok tengah": {
+      "id": "1804",
+      "name": "KAB. LOMBOK TENGAH"
+    },
+    "kab. lombok timur": {
+      "id": "1805",
+      "name": "KAB. LOMBOK TIMUR"
+    },
+    "kab. lombok utara": {
+      "id": "1806",
+      "name": "KAB. LOMBOK UTARA"
+    },
+    "kab. sumbawa": {
+      "id": "1807",
+      "name": "KAB. SUMBAWA"
+    },
+    "kab. sumbawa barat": {
+      "id": "1808",
+      "name": "KAB. SUMBAWA BARAT"
+    },
+    "kota bima": {
+      "id": "1809",
+      "name": "KOTA BIMA"
+    },
+    "kota mataram": {
+      "id": "1810",
+      "name": "KOTA MATARAM"
+    },
+    "kab. alor": {
+      "id": "1901",
+      "name": "KAB. ALOR"
+    },
+    "kab. belu": {
+      "id": "1902",
+      "name": "KAB. BELU"
+    },
+    "kab. ende": {
+      "id": "1903",
+      "name": "KAB. ENDE"
+    },
+    "kab. flores timur": {
+      "id": "1904",
+      "name": "KAB. FLORES TIMUR"
+    },
+    "kab. kupang": {
+      "id": "1905",
+      "name": "KAB. KUPANG"
+    },
+    "kab. lembata": {
+      "id": "1906",
+      "name": "KAB. LEMBATA"
+    },
+    "kab. malaka": {
+      "id": "1907",
+      "name": "KAB. MALAKA"
+    },
+    "kab. manggarai": {
+      "id": "1908",
+      "name": "KAB. MANGGARAI"
+    },
+    "kab. manggarai barat": {
+      "id": "1909",
+      "name": "KAB. MANGGARAI BARAT"
+    },
+    "kab. manggarai timur": {
+      "id": "1910",
+      "name": "KAB. MANGGARAI TIMUR"
+    },
+    "kab. ngada": {
+      "id": "1911",
+      "name": "KAB. NGADA"
+    },
+    "kab. nagekeo": {
+      "id": "1912",
+      "name": "KAB. NAGEKEO"
+    },
+    "kab. rote ndao": {
+      "id": "1913",
+      "name": "KAB. ROTE NDAO"
+    },
+    "kab. sabu raijua": {
+      "id": "1914",
+      "name": "KAB. SABU RAIJUA"
+    },
+    "kab. sikka": {
+      "id": "1915",
+      "name": "KAB. SIKKA"
+    },
+    "kab. sumba barat": {
+      "id": "1916",
+      "name": "KAB. SUMBA BARAT"
+    },
+    "kab. sumba barat daya": {
+      "id": "1917",
+      "name": "KAB. SUMBA BARAT DAYA"
+    },
+    "kab. sumba tengah": {
+      "id": "1918",
+      "name": "KAB. SUMBA TENGAH"
+    },
+    "kab. sumba timur": {
+      "id": "1919",
+      "name": "KAB. SUMBA TIMUR"
+    },
+    "kab. timor tengah selatan": {
+      "id": "1920",
+      "name": "KAB. TIMOR TENGAH SELATAN"
+    },
+    "kab. timor tengah utara": {
+      "id": "1921",
+      "name": "KAB. TIMOR TENGAH UTARA"
+    },
+    "kota kupang": {
+      "id": "1922",
+      "name": "KOTA KUPANG"
+    },
+    "kab. bengkayang": {
+      "id": "2001",
+      "name": "KAB. BENGKAYANG"
+    },
+    "kab. kapuas hulu": {
+      "id": "2002",
+      "name": "KAB. KAPUAS HULU"
+    },
+    "kab. kayong utara": {
+      "id": "2003",
+      "name": "KAB. KAYONG UTARA"
+    },
+    "kab. ketapang": {
+      "id": "2004",
+      "name": "KAB. KETAPANG"
+    },
+    "kab. kubu raya": {
+      "id": "2005",
+      "name": "KAB. KUBU RAYA"
+    },
+    "kab. landak": {
+      "id": "2006",
+      "name": "KAB. LANDAK"
+    },
+    "kab. melawi": {
+      "id": "2007",
+      "name": "KAB. MELAWI"
+    },
+    "kab. mempawah": {
+      "id": "2008",
+      "name": "KAB. MEMPAWAH"
+    },
+    "kab. sambas": {
+      "id": "2009",
+      "name": "KAB. SAMBAS"
+    },
+    "kab. sanggau": {
+      "id": "2010",
+      "name": "KAB. SANGGAU"
+    },
+    "kab. sekadau": {
+      "id": "2011",
+      "name": "KAB. SEKADAU"
+    },
+    "kab. sintang": {
+      "id": "2012",
+      "name": "KAB. SINTANG"
+    },
+    "kota pontianak": {
+      "id": "2013",
+      "name": "KOTA PONTIANAK"
+    },
+    "kota singkawang": {
+      "id": "2014",
+      "name": "KOTA SINGKAWANG"
+    },
+    "kab. balangan": {
+      "id": "2101",
+      "name": "KAB. BALANGAN"
+    },
+    "kab. banjar": {
+      "id": "2102",
+      "name": "KAB. BANJAR"
+    },
+    "kab. barito kuala": {
+      "id": "2103",
+      "name": "KAB. BARITO KUALA"
+    },
+    "kab. hulu sungai selatan": {
+      "id": "2104",
+      "name": "KAB. HULU SUNGAI SELATAN"
+    },
+    "kab. hulu sungai tengah": {
+      "id": "2105",
+      "name": "KAB. HULU SUNGAI TENGAH"
+    },
+    "kab. hulu sungai utara": {
+      "id": "2106",
+      "name": "KAB. HULU SUNGAI UTARA"
+    },
+    "kab. kotabaru": {
+      "id": "2107",
+      "name": "KAB. KOTABARU"
+    },
+    "kab. tabalong": {
+      "id": "2108",
+      "name": "KAB. TABALONG"
+    },
+    "kab. tanah bumbu": {
+      "id": "2109",
+      "name": "KAB. TANAH BUMBU"
+    },
+    "kab. tanah laut": {
+      "id": "2110",
+      "name": "KAB. TANAH LAUT"
+    },
+    "kab. tapin": {
+      "id": "2111",
+      "name": "KAB. TAPIN"
+    },
+    "kota banjarbaru": {
+      "id": "2112",
+      "name": "KOTA BANJARBARU"
+    },
+    "kota banjarmasin": {
+      "id": "2113",
+      "name": "KOTA BANJARMASIN"
+    },
+    "kab. barito selatan": {
+      "id": "2201",
+      "name": "KAB. BARITO SELATAN"
+    },
+    "kab. barito timur": {
+      "id": "2202",
+      "name": "KAB. BARITO TIMUR"
+    },
+    "kab. barito utara": {
+      "id": "2203",
+      "name": "KAB. BARITO UTARA"
+    },
+    "kab. gunung mas": {
+      "id": "2204",
+      "name": "KAB. GUNUNG MAS"
+    },
+    "kab. kapuas": {
+      "id": "2205",
+      "name": "KAB. KAPUAS"
+    },
+    "kab. katingan": {
+      "id": "2206",
+      "name": "KAB. KATINGAN"
+    },
+    "kab. kotawaringin barat": {
+      "id": "2207",
+      "name": "KAB. KOTAWARINGIN BARAT"
+    },
+    "kab. kotawaringin timur": {
+      "id": "2208",
+      "name": "KAB. KOTAWARINGIN TIMUR"
+    },
+    "kab. lamandau": {
+      "id": "2209",
+      "name": "KAB. LAMANDAU"
+    },
+    "kab. murung raya": {
+      "id": "2210",
+      "name": "KAB. MURUNG RAYA"
+    },
+    "kab. pulang pisau": {
+      "id": "2211",
+      "name": "KAB. PULANG PISAU"
+    },
+    "kab. sukamara": {
+      "id": "2212",
+      "name": "KAB. SUKAMARA"
+    },
+    "kab. seruyan": {
+      "id": "2213",
+      "name": "KAB. SERUYAN"
+    },
+    "kota palangkaraya": {
+      "id": "2214",
+      "name": "KOTA PALANGKARAYA"
+    },
+    "kab. berau": {
+      "id": "2301",
+      "name": "KAB. BERAU"
+    },
+    "kab. kutai barat": {
+      "id": "2302",
+      "name": "KAB. KUTAI BARAT"
+    },
+    "kab. kutai kartanegara": {
+      "id": "2303",
+      "name": "KAB. KUTAI KARTANEGARA"
+    },
+    "kab. kutai timur": {
+      "id": "2304",
+      "name": "KAB. KUTAI TIMUR"
+    },
+    "kab. mahakam ulu": {
+      "id": "2305",
+      "name": "KAB. MAHAKAM ULU"
+    },
+    "kab. paser": {
+      "id": "2306",
+      "name": "KAB. PASER"
+    },
+    "kab. penajam paser utara": {
+      "id": "2307",
+      "name": "KAB. PENAJAM PASER UTARA"
+    },
+    "kota balikpapan": {
+      "id": "2308",
+      "name": "KOTA BALIKPAPAN"
+    },
+    "kota bontang": {
+      "id": "2309",
+      "name": "KOTA BONTANG"
+    },
+    "kota samarinda": {
+      "id": "2310",
+      "name": "KOTA SAMARINDA"
+    },
+    "kab. bulungan": {
+      "id": "2401",
+      "name": "KAB. BULUNGAN"
+    },
+    "kab. malinau": {
+      "id": "2402",
+      "name": "KAB. MALINAU"
+    },
+    "kab. nunukan": {
+      "id": "2403",
+      "name": "KAB. NUNUKAN"
+    },
+    "kab. tana tidung": {
+      "id": "2404",
+      "name": "KAB. TANA TIDUNG"
+    },
+    "kota tarakan": {
+      "id": "2405",
+      "name": "KOTA TARAKAN"
+    },
+    "kab. boalemo": {
+      "id": "2501",
+      "name": "KAB. BOALEMO"
+    },
+    "kab. bone bolango": {
+      "id": "2502",
+      "name": "KAB. BONE BOLANGO"
+    },
+    "kab. gorontalo": {
+      "id": "2503",
+      "name": "KAB. GORONTALO"
+    },
+    "kab. gorontalo utara": {
+      "id": "2504",
+      "name": "KAB. GORONTALO UTARA"
+    },
+    "kab. pohuwato": {
+      "id": "2505",
+      "name": "KAB. POHUWATO"
+    },
+    "kota gorontalo": {
+      "id": "2506",
+      "name": "KOTA GORONTALO"
+    },
+    "kab. bantaeng": {
+      "id": "2601",
+      "name": "KAB. BANTAENG"
+    },
+    "kab. barru": {
+      "id": "2602",
+      "name": "KAB. BARRU"
+    },
+    "kab. bone": {
+      "id": "2603",
+      "name": "KAB. BONE"
+    },
+    "kab. bulukumba": {
+      "id": "2604",
+      "name": "KAB. BULUKUMBA"
+    },
+    "kab. enrekang": {
+      "id": "2605",
+      "name": "KAB. ENREKANG"
+    },
+    "kab. gowa": {
+      "id": "2606",
+      "name": "KAB. GOWA"
+    },
+    "kab. jeneponto": {
+      "id": "2607",
+      "name": "KAB. JENEPONTO"
+    },
+    "kab. kepulauan selayar": {
+      "id": "2608",
+      "name": "KAB. KEPULAUAN SELAYAR"
+    },
+    "kab. luwu": {
+      "id": "2609",
+      "name": "KAB. LUWU"
+    },
+    "kab. luwu timur": {
+      "id": "2610",
+      "name": "KAB. LUWU TIMUR"
+    },
+    "kab. luwu utara": {
+      "id": "2611",
+      "name": "KAB. LUWU UTARA"
+    },
+    "kab. maros": {
+      "id": "2612",
+      "name": "KAB. MAROS"
+    },
+    "kab. pangkajene dan kepulauan": {
+      "id": "2613",
+      "name": "KAB. PANGKAJENE DAN KEPULAUAN"
+    },
+    "kab. pinrang": {
+      "id": "2614",
+      "name": "KAB. PINRANG"
+    },
+    "kab. sidenreng rappang": {
+      "id": "2615",
+      "name": "KAB. SIDENRENG RAPPANG"
+    },
+    "kab. sinjai": {
+      "id": "2616",
+      "name": "KAB. SINJAI"
+    },
+    "kab. soppeng": {
+      "id": "2617",
+      "name": "KAB. SOPPENG"
+    },
+    "kab. takalar": {
+      "id": "2618",
+      "name": "KAB. TAKALAR"
+    },
+    "kab. tana toraja": {
+      "id": "2619",
+      "name": "KAB. TANA TORAJA"
+    },
+    "kab. toraja utara": {
+      "id": "2620",
+      "name": "KAB. TORAJA UTARA"
+    },
+    "kab. wajo": {
+      "id": "2621",
+      "name": "KAB. WAJO"
+    },
+    "kota makassar": {
+      "id": "2622",
+      "name": "KOTA MAKASSAR"
+    },
+    "kota palopo": {
+      "id": "2623",
+      "name": "KOTA PALOPO"
+    },
+    "kota parepare": {
+      "id": "2624",
+      "name": "KOTA PAREPARE"
+    },
+    "kab. bombana": {
+      "id": "2701",
+      "name": "KAB. BOMBANA"
+    },
+    "kab. buton": {
+      "id": "2702",
+      "name": "KAB. BUTON"
+    },
+    "kab. buton selatan": {
+      "id": "2703",
+      "name": "KAB. BUTON SELATAN"
+    },
+    "kab. buton tengah": {
+      "id": "2704",
+      "name": "KAB. BUTON TENGAH"
+    },
+    "kab. buton utara": {
+      "id": "2705",
+      "name": "KAB. BUTON UTARA"
+    },
+    "kab. kolaka": {
+      "id": "2706",
+      "name": "KAB. KOLAKA"
+    },
+    "kab. kolaka timur": {
+      "id": "2707",
+      "name": "KAB. KOLAKA TIMUR"
+    },
+    "kab. kolaka utara": {
+      "id": "2708",
+      "name": "KAB. KOLAKA UTARA"
+    },
+    "kab. konawe": {
+      "id": "2709",
+      "name": "KAB. KONAWE"
+    },
+    "kab. konawe kepulauan": {
+      "id": "2710",
+      "name": "KAB. KONAWE KEPULAUAN"
+    },
+    "kab. konawe selatan": {
+      "id": "2711",
+      "name": "KAB. KONAWE SELATAN"
+    },
+    "kab. konawe utara": {
+      "id": "2712",
+      "name": "KAB. KONAWE UTARA"
+    },
+    "kab. muna": {
+      "id": "2713",
+      "name": "KAB. MUNA"
+    },
+    "kab. muna barat": {
+      "id": "2714",
+      "name": "KAB. MUNA BARAT"
+    },
+    "kab. wakatobi": {
+      "id": "2715",
+      "name": "KAB. WAKATOBI"
+    },
+    "kota bau-bau": {
+      "id": "2716",
+      "name": "KOTA BAU-BAU"
+    },
+    "kota kendari": {
+      "id": "2717",
+      "name": "KOTA KENDARI"
+    },
+    "kab. banggai": {
+      "id": "2801",
+      "name": "KAB. BANGGAI"
+    },
+    "kab. banggai kepulauan": {
+      "id": "2802",
+      "name": "KAB. BANGGAI KEPULAUAN"
+    },
+    "kab. banggai laut": {
+      "id": "2803",
+      "name": "KAB. BANGGAI LAUT"
+    },
+    "kab. buol": {
+      "id": "2804",
+      "name": "KAB. BUOL"
+    },
+    "kab. donggala": {
+      "id": "2805",
+      "name": "KAB. DONGGALA"
+    },
+    "kab. morowali": {
+      "id": "2806",
+      "name": "KAB. MOROWALI"
+    },
+    "kab. morowali utara": {
+      "id": "2807",
+      "name": "KAB. MOROWALI UTARA"
+    },
+    "kab. parigi moutong": {
+      "id": "2808",
+      "name": "KAB. PARIGI MOUTONG"
+    },
+    "kab. poso": {
+      "id": "2809",
+      "name": "KAB. POSO"
+    },
+    "kab. sigi": {
+      "id": "2810",
+      "name": "KAB. SIGI"
+    },
+    "kab. tojo una-una": {
+      "id": "2811",
+      "name": "KAB. TOJO UNA-UNA"
+    },
+    "kab. toli-toli": {
+      "id": "2812",
+      "name": "KAB. TOLI-TOLI"
+    },
+    "kota palu": {
+      "id": "2813",
+      "name": "KOTA PALU"
+    },
+    "kab. bolaang mongondow": {
+      "id": "2901",
+      "name": "KAB. BOLAANG MONGONDOW"
+    },
+    "kab. bolaang mongondow selatan": {
+      "id": "2902",
+      "name": "KAB. BOLAANG MONGONDOW SELATAN"
+    },
+    "kab. bolaang mongondow timur": {
+      "id": "2903",
+      "name": "KAB. BOLAANG MONGONDOW TIMUR"
+    },
+    "kab. bolaang mongondow utara": {
+      "id": "2904",
+      "name": "KAB. BOLAANG MONGONDOW UTARA"
+    },
+    "kab. kepulauan sangihe": {
+      "id": "2905",
+      "name": "KAB. KEPULAUAN SANGIHE"
+    },
+    "kab. kepulauan siau tagulandang biaro": {
+      "id": "2906",
+      "name": "KAB. KEPULAUAN SIAU TAGULANDANG BIARO"
+    },
+    "kab. kepulauan talaud": {
+      "id": "2907",
+      "name": "KAB. KEPULAUAN TALAUD"
+    },
+    "kab. minahasa": {
+      "id": "2908",
+      "name": "KAB. MINAHASA"
+    },
+    "kab. minahasa selatan": {
+      "id": "2909",
+      "name": "KAB. MINAHASA SELATAN"
+    },
+    "kab. minahasa tenggara": {
+      "id": "2910",
+      "name": "KAB. MINAHASA TENGGARA"
+    },
+    "kab. minahasa utara": {
+      "id": "2911",
+      "name": "KAB. MINAHASA UTARA"
+    },
+    "kota bitung": {
+      "id": "2912",
+      "name": "KOTA BITUNG"
+    },
+    "kota kotamobagu": {
+      "id": "2913",
+      "name": "KOTA KOTAMOBAGU"
+    },
+    "kota manado": {
+      "id": "2914",
+      "name": "KOTA MANADO"
+    },
+    "kota tomohon": {
+      "id": "2915",
+      "name": "KOTA TOMOHON"
+    },
+    "kab. majene": {
+      "id": "3001",
+      "name": "KAB. MAJENE"
+    },
+    "kab. mamasa": {
+      "id": "3002",
+      "name": "KAB. MAMASA"
+    },
+    "kab. mamuju": {
+      "id": "3003",
+      "name": "KAB. MAMUJU"
+    },
+    "kab. mamuju tengah": {
+      "id": "3004",
+      "name": "KAB. MAMUJU TENGAH"
+    },
+    "kab. mamuju utara": {
+      "id": "3005",
+      "name": "KAB. MAMUJU UTARA"
+    },
+    "kab. polewali mandar": {
+      "id": "3006",
+      "name": "KAB. POLEWALI MANDAR"
+    },
+    "kab. buru": {
+      "id": "3101",
+      "name": "KAB. BURU"
+    },
+    "kab. buru selatan": {
+      "id": "3102",
+      "name": "KAB. BURU SELATAN"
+    },
+    "kab. kepulauan aru": {
+      "id": "3103",
+      "name": "KAB. KEPULAUAN ARU"
+    },
+    "kab. maluku barat daya": {
+      "id": "3104",
+      "name": "KAB. MALUKU BARAT DAYA"
+    },
+    "kab. maluku tengah": {
+      "id": "3105",
+      "name": "KAB. MALUKU TENGAH"
+    },
+    "kab. maluku tenggara": {
+      "id": "3106",
+      "name": "KAB. MALUKU TENGGARA"
+    },
+    "kab. maluku tenggara barat": {
+      "id": "3107",
+      "name": "KAB. MALUKU TENGGARA BARAT"
+    },
+    "kab. seram bagian barat": {
+      "id": "3108",
+      "name": "KAB. SERAM BAGIAN BARAT"
+    },
+    "kab. seram bagian timur": {
+      "id": "3109",
+      "name": "KAB. SERAM BAGIAN TIMUR"
+    },
+    "kota ambon": {
+      "id": "3110",
+      "name": "KOTA AMBON"
+    },
+    "kota tual": {
+      "id": "3111",
+      "name": "KOTA TUAL"
+    },
+    "kab. halmahera barat": {
+      "id": "3201",
+      "name": "KAB. HALMAHERA BARAT"
+    },
+    "kab. halmahera tengah": {
+      "id": "3202",
+      "name": "KAB. HALMAHERA TENGAH"
+    },
+    "kab. halmahera utara": {
+      "id": "3203",
+      "name": "KAB. HALMAHERA UTARA"
+    },
+    "kab. halmahera selatan": {
+      "id": "3204",
+      "name": "KAB. HALMAHERA SELATAN"
+    },
+    "kab. kepulauan sula": {
+      "id": "3205",
+      "name": "KAB. KEPULAUAN SULA"
+    },
+    "kab. halmahera timur": {
+      "id": "3206",
+      "name": "KAB. HALMAHERA TIMUR"
+    },
+    "kab. pulau morotai": {
+      "id": "3207",
+      "name": "KAB. PULAU MOROTAI"
+    },
+    "kab. pulau taliabu": {
+      "id": "3208",
+      "name": "KAB. PULAU TALIABU"
+    },
+    "kota ternate": {
+      "id": "3209",
+      "name": "KOTA TERNATE"
+    },
+    "kota tidore kepulauan": {
+      "id": "3210",
+      "name": "KOTA TIDORE KEPULAUAN"
+    },
+    "kota sofifi": {
+      "id": "3212",
+      "name": "KOTA SOFIFI"
+    },
+    "kab. asmat": {
+      "id": "3301",
+      "name": "KAB. ASMAT"
+    },
+    "kab. biak numfor": {
+      "id": "3302",
+      "name": "KAB. BIAK NUMFOR"
+    },
+    "kab. boven digoel": {
+      "id": "3303",
+      "name": "KAB. BOVEN DIGOEL"
+    },
+    "kab. deiyai": {
+      "id": "3304",
+      "name": "KAB. DEIYAI"
+    },
+    "kab. dogiyai": {
+      "id": "3305",
+      "name": "KAB. DOGIYAI"
+    },
+    "kab. intan jaya": {
+      "id": "3306",
+      "name": "KAB. INTAN JAYA"
+    },
+    "kab. jayapura": {
+      "id": "3307",
+      "name": "KAB. JAYAPURA"
+    },
+    "kab. jayawijaya": {
+      "id": "3308",
+      "name": "KAB. JAYAWIJAYA"
+    },
+    "kab. keerom": {
+      "id": "3309",
+      "name": "KAB. KEEROM"
+    },
+    "kab. kepulauan yapen": {
+      "id": "3310",
+      "name": "KAB. KEPULAUAN YAPEN"
+    },
+    "kab. lanny jaya": {
+      "id": "3311",
+      "name": "KAB. LANNY JAYA"
+    },
+    "kab. mamberamo raya": {
+      "id": "3312",
+      "name": "KAB. MAMBERAMO RAYA"
+    },
+    "kab. mamberamo tengah": {
+      "id": "3313",
+      "name": "KAB. MAMBERAMO TENGAH"
+    },
+    "kab. mappi": {
+      "id": "3314",
+      "name": "KAB. MAPPI"
+    },
+    "kab. merauke": {
+      "id": "3315",
+      "name": "KAB. MERAUKE"
+    },
+    "kab. mimika": {
+      "id": "3316",
+      "name": "KAB. MIMIKA"
+    },
+    "kab. nabire": {
+      "id": "3317",
+      "name": "KAB. NABIRE"
+    },
+    "kab. nduga": {
+      "id": "3318",
+      "name": "KAB. NDUGA"
+    },
+    "kab. paniai": {
+      "id": "3319",
+      "name": "KAB. PANIAI"
+    },
+    "kab. pegunungan bintang": {
+      "id": "3320",
+      "name": "KAB. PEGUNUNGAN BINTANG"
+    },
+    "kab. puncak": {
+      "id": "3321",
+      "name": "KAB. PUNCAK"
+    },
+    "kab. puncak jaya": {
+      "id": "3322",
+      "name": "KAB. PUNCAK JAYA"
+    },
+    "kab. sarmi": {
+      "id": "3323",
+      "name": "KAB. SARMI"
+    },
+    "kab. supiori": {
+      "id": "3324",
+      "name": "KAB. SUPIORI"
+    },
+    "kab. tolikara": {
+      "id": "3325",
+      "name": "KAB. TOLIKARA"
+    },
+    "kab. waropen": {
+      "id": "3326",
+      "name": "KAB. WAROPEN"
+    },
+    "kab. yahukimo": {
+      "id": "3327",
+      "name": "KAB. YAHUKIMO"
+    },
+    "kab. yalimo": {
+      "id": "3328",
+      "name": "KAB. YALIMO"
+    },
+    "kota jayapura": {
+      "id": "3329",
+      "name": "KOTA JAYAPURA"
+    },
+    "kab. yapen waropen": {
+      "id": "3330",
+      "name": "KAB. YAPEN WAROPEN"
+    },
+    "kab. fakfak": {
+      "id": "3401",
+      "name": "KAB. FAKFAK"
+    },
+    "kab. kaimana": {
+      "id": "3402",
+      "name": "KAB. KAIMANA"
+    },
+    "kab. manokwari": {
+      "id": "3403",
+      "name": "KAB. MANOKWARI"
+    },
+    "kab. manokwari selatan": {
+      "id": "3404",
+      "name": "KAB. MANOKWARI SELATAN"
+    },
+    "kab. maybrat": {
+      "id": "3405",
+      "name": "KAB. MAYBRAT"
+    },
+    "kab. pegunungan arfak": {
+      "id": "3406",
+      "name": "KAB. PEGUNUNGAN ARFAK"
+    },
+    "kab. raja ampat": {
+      "id": "3407",
+      "name": "KAB. RAJA AMPAT"
+    },
+    "kab. sorong": {
+      "id": "3408",
+      "name": "KAB. SORONG"
+    },
+    "kab. sorong selatan": {
+      "id": "3409",
+      "name": "KAB. SORONG SELATAN"
+    },
+    "kab. tambrauw": {
+      "id": "3410",
+      "name": "KAB. TAMBRAUW"
+    },
+    "kab. teluk bintuni": {
+      "id": "3411",
+      "name": "KAB. TELUK BINTUNI"
+    },
+    "kab. teluk wondama": {
+      "id": "3412",
+      "name": "KAB. TELUK WONDAMA"
+    },
+    "kota sorong": {
+      "id": "3413",
+      "name": "KOTA SORONG"
+    },
+    "kab. aceh barat": {
+      "id": "0101",
+      "name": "KAB. ACEH BARAT"
+    },
+    "kab. aceh barat daya": {
+      "id": "0102",
+      "name": "KAB. ACEH BARAT DAYA"
+    },
+    "kab. aceh besar": {
+      "id": "0103",
+      "name": "KAB. ACEH BESAR"
+    },
+    "kab. aceh jaya": {
+      "id": "0104",
+      "name": "KAB. ACEH JAYA"
+    },
+    "kab. aceh selatan": {
+      "id": "0105",
+      "name": "KAB. ACEH SELATAN"
+    },
+    "kab. aceh singkil": {
+      "id": "0106",
+      "name": "KAB. ACEH SINGKIL"
+    },
+    "kab. aceh tamiang": {
+      "id": "0107",
+      "name": "KAB. ACEH TAMIANG"
+    },
+    "kab. aceh tengah": {
+      "id": "0108",
+      "name": "KAB. ACEH TENGAH"
+    },
+    "kab. aceh tenggara": {
+      "id": "0109",
+      "name": "KAB. ACEH TENGGARA"
+    },
+    "kab. aceh timur": {
+      "id": "0110",
+      "name": "KAB. ACEH TIMUR"
+    },
+    "kab. aceh utara": {
+      "id": "0111",
+      "name": "KAB. ACEH UTARA"
+    },
+    "kab. bener meriah": {
+      "id": "0112",
+      "name": "KAB. BENER MERIAH"
+    },
+    "kab. bireuen": {
+      "id": "0113",
+      "name": "KAB. BIREUEN"
+    },
+    "kab. gayo lues": {
+      "id": "0114",
+      "name": "KAB. GAYO LUES"
+    },
+    "kab. nagan raya": {
+      "id": "0115",
+      "name": "KAB. NAGAN RAYA"
+    },
+    "kab. pidie": {
+      "id": "0116",
+      "name": "KAB. PIDIE"
+    },
+    "kab. pidie jaya": {
+      "id": "0117",
+      "name": "KAB. PIDIE JAYA"
+    },
+    "kab. simeulue": {
+      "id": "0118",
+      "name": "KAB. SIMEULUE"
+    },
+    "kota banda aceh": {
+      "id": "0119",
+      "name": "KOTA BANDA ACEH"
+    },
+    "kota langsa": {
+      "id": "0120",
+      "name": "KOTA LANGSA"
+    },
+    "kota lhokseumawe": {
+      "id": "0121",
+      "name": "KOTA LHOKSEUMAWE"
+    },
+    "kota sabang": {
+      "id": "0122",
+      "name": "KOTA SABANG"
+    },
+    "kota subulussalam": {
+      "id": "0123",
+      "name": "KOTA SUBULUSSALAM"
+    },
+    "kab. asahan": {
+      "id": "0201",
+      "name": "KAB. ASAHAN"
+    },
+    "kab. batubara": {
+      "id": "0202",
+      "name": "KAB. BATUBARA"
+    },
+    "kab. dairi": {
+      "id": "0203",
+      "name": "KAB. DAIRI"
+    },
+    "kab. deli serdang": {
+      "id": "0204",
+      "name": "KAB. DELI SERDANG"
+    },
+    "kab. humbang hasundutan": {
+      "id": "0205",
+      "name": "KAB. HUMBANG HASUNDUTAN"
+    },
+    "kab. karo": {
+      "id": "0206",
+      "name": "KAB. KARO"
+    },
+    "kab. labuhanbatu": {
+      "id": "0207",
+      "name": "KAB. LABUHANBATU"
+    },
+    "kab. labuhanbatu selatan": {
+      "id": "0208",
+      "name": "KAB. LABUHANBATU SELATAN"
+    },
+    "kab. labuhanbatu utara": {
+      "id": "0209",
+      "name": "KAB. LABUHANBATU UTARA"
+    },
+    "kab. langkat": {
+      "id": "0210",
+      "name": "KAB. LANGKAT"
+    },
+    "kab. mandailing natal": {
+      "id": "0211",
+      "name": "KAB. MANDAILING NATAL"
+    },
+    "kab. nias": {
+      "id": "0212",
+      "name": "KAB. NIAS"
+    },
+    "kab. nias barat": {
+      "id": "0213",
+      "name": "KAB. NIAS BARAT"
+    },
+    "kab. nias selatan": {
+      "id": "0214",
+      "name": "KAB. NIAS SELATAN"
+    },
+    "kab. nias utara": {
+      "id": "0215",
+      "name": "KAB. NIAS UTARA"
+    },
+    "kab. padang lawas": {
+      "id": "0216",
+      "name": "KAB. PADANG LAWAS"
+    },
+    "kab. padang lawas utara": {
+      "id": "0217",
+      "name": "KAB. PADANG LAWAS UTARA"
+    },
+    "kab. pakpak bharat": {
+      "id": "0218",
+      "name": "KAB. PAKPAK BHARAT"
+    },
+    "kab. samosir": {
+      "id": "0219",
+      "name": "KAB. SAMOSIR"
+    },
+    "kab. serdang bedagai": {
+      "id": "0220",
+      "name": "KAB. SERDANG BEDAGAI"
+    },
+    "kab. simalungun": {
+      "id": "0221",
+      "name": "KAB. SIMALUNGUN"
+    },
+    "kab. tapanuli selatan": {
+      "id": "0222",
+      "name": "KAB. TAPANULI SELATAN"
+    },
+    "kab. tapanuli tengah": {
+      "id": "0223",
+      "name": "KAB. TAPANULI TENGAH"
+    },
+    "kab. tapanuli utara": {
+      "id": "0224",
+      "name": "KAB. TAPANULI UTARA"
+    },
+    "kab. toba samosir": {
+      "id": "0225",
+      "name": "KAB. TOBA SAMOSIR"
+    },
+    "kota binjai": {
+      "id": "0226",
+      "name": "KOTA BINJAI"
+    },
+    "kota gunungsitoli": {
+      "id": "0227",
+      "name": "KOTA GUNUNGSITOLI"
+    },
+    "kota medan": {
+      "id": "0228",
+      "name": "KOTA MEDAN"
+    },
+    "kota padangsidempuan": {
+      "id": "0229",
+      "name": "KOTA PADANGSIDEMPUAN"
+    },
+    "kota pematangsiantar": {
+      "id": "0230",
+      "name": "KOTA PEMATANGSIANTAR"
+    },
+    "kota sibolga": {
+      "id": "0231",
+      "name": "KOTA SIBOLGA"
+    },
+    "kota tanjungbalai": {
+      "id": "0232",
+      "name": "KOTA TANJUNGBALAI"
+    },
+    "kota tebing tinggi": {
+      "id": "0233",
+      "name": "KOTA TEBING TINGGI"
+    },
+    "kab. agam": {
+      "id": "0301",
+      "name": "KAB. AGAM"
+    },
+    "kab. dharmasraya": {
+      "id": "0302",
+      "name": "KAB. DHARMASRAYA"
+    },
+    "kab. kepulauan mentawai": {
+      "id": "0303",
+      "name": "KAB. KEPULAUAN MENTAWAI"
+    },
+    "kab. lima puluh kota": {
+      "id": "0304",
+      "name": "KAB. LIMA PULUH KOTA"
+    },
+    "kab. padang pariaman": {
+      "id": "0305",
+      "name": "KAB. PADANG PARIAMAN"
+    },
+    "kab. pasaman": {
+      "id": "0306",
+      "name": "KAB. PASAMAN"
+    },
+    "kab. pasaman barat": {
+      "id": "0307",
+      "name": "KAB. PASAMAN BARAT"
+    },
+    "kab. pesisir selatan": {
+      "id": "0308",
+      "name": "KAB. PESISIR SELATAN"
+    },
+    "kab. sijunjung": {
+      "id": "0309",
+      "name": "KAB. SIJUNJUNG"
+    },
+    "kab. solok": {
+      "id": "0310",
+      "name": "KAB. SOLOK"
+    },
+    "kab. solok selatan": {
+      "id": "0311",
+      "name": "KAB. SOLOK SELATAN"
+    },
+    "kab. tanah datar": {
+      "id": "0312",
+      "name": "KAB. TANAH DATAR"
+    },
+    "kota bukittinggi": {
+      "id": "0313",
+      "name": "KOTA BUKITTINGGI"
+    },
+    "kota padang": {
+      "id": "0314",
+      "name": "KOTA PADANG"
+    },
+    "kota padangpanjang": {
+      "id": "0315",
+      "name": "KOTA PADANGPANJANG"
+    },
+    "kota pariaman": {
+      "id": "0316",
+      "name": "KOTA PARIAMAN"
+    },
+    "kota payakumbuh": {
+      "id": "0317",
+      "name": "KOTA PAYAKUMBUH"
+    },
+    "kota sawahlunto": {
+      "id": "0318",
+      "name": "KOTA SAWAHLUNTO"
+    },
+    "kota solok": {
+      "id": "0319",
+      "name": "KOTA SOLOK"
+    },
+    "kab. bengkalis": {
+      "id": "0401",
+      "name": "KAB. BENGKALIS"
+    },
+    "kab. indragiri hilir": {
+      "id": "0402",
+      "name": "KAB. INDRAGIRI HILIR"
+    },
+    "kab. indragiri hulu": {
+      "id": "0403",
+      "name": "KAB. INDRAGIRI HULU"
+    },
+    "kab. kampar": {
+      "id": "0404",
+      "name": "KAB. KAMPAR"
+    },
+    "kab. kepulauan meranti": {
+      "id": "0405",
+      "name": "KAB. KEPULAUAN MERANTI"
+    },
+    "kab. kuantan singingi": {
+      "id": "0406",
+      "name": "KAB. KUANTAN SINGINGI"
+    },
+    "kab. pelalawan": {
+      "id": "0407",
+      "name": "KAB. PELALAWAN"
+    },
+    "kab. rokan hilir": {
+      "id": "0408",
+      "name": "KAB. ROKAN HILIR"
+    },
+    "kab. rokan hulu": {
+      "id": "0409",
+      "name": "KAB. ROKAN HULU"
+    },
+    "kab. siak": {
+      "id": "0410",
+      "name": "KAB. SIAK"
+    },
+    "kota dumai": {
+      "id": "0411",
+      "name": "KOTA DUMAI"
+    },
+    "kota pekanbaru": {
+      "id": "0412",
+      "name": "KOTA PEKANBARU"
+    },
+    "kab. bintan": {
+      "id": "0501",
+      "name": "KAB. BINTAN"
+    },
+    "kab. karimun": {
+      "id": "0502",
+      "name": "KAB. KARIMUN"
+    },
+    "kab. kepulauan anambas": {
+      "id": "0503",
+      "name": "KAB. KEPULAUAN ANAMBAS"
+    },
+    "kab. lingga": {
+      "id": "0504",
+      "name": "KAB. LINGGA"
+    },
+    "kab. natuna": {
+      "id": "0505",
+      "name": "KAB. NATUNA"
+    },
+    "kota batam": {
+      "id": "0506",
+      "name": "KOTA BATAM"
+    },
+    "kota tanjung pinang": {
+      "id": "0507",
+      "name": "KOTA TANJUNG PINANG"
+    },
+    "pulau tambelan kab. bintan": {
+      "id": "0508",
+      "name": "PULAU TAMBELAN KAB. BINTAN"
+    },
+    "pekajang kab. lingga": {
+      "id": "0509",
+      "name": "PEKAJANG KAB. LINGGA"
+    },
+    "pulau serasan kab. natuna": {
+      "id": "0510",
+      "name": "PULAU SERASAN KAB. NATUNA"
+    },
+    "pulau midai kab. natuna": {
+      "id": "0511",
+      "name": "PULAU MIDAI KAB. NATUNA"
+    },
+    "pulau laut kab. natuna": {
+      "id": "0512",
+      "name": "PULAU LAUT KAB. NATUNA"
+    },
+    "kab. batanghari": {
+      "id": "0601",
+      "name": "KAB. BATANGHARI"
+    },
+    "kab. bungo": {
+      "id": "0602",
+      "name": "KAB. BUNGO"
+    },
+    "kab. kerinci": {
+      "id": "0603",
+      "name": "KAB. KERINCI"
+    },
+    "kab. merangin": {
+      "id": "0604",
+      "name": "KAB. MERANGIN"
+    },
+    "kab. muaro jambi": {
+      "id": "0605",
+      "name": "KAB. MUARO JAMBI"
+    },
+    "kab. sarolangun": {
+      "id": "0606",
+      "name": "KAB. SAROLANGUN"
+    },
+    "kab. tanjung jabung barat": {
+      "id": "0607",
+      "name": "KAB. TANJUNG JABUNG BARAT"
+    },
+    "kab. tanjung jabung timur": {
+      "id": "0608",
+      "name": "KAB. TANJUNG JABUNG TIMUR"
+    },
+    "kab. tebo": {
+      "id": "0609",
+      "name": "KAB. TEBO"
+    },
+    "kota jambi": {
+      "id": "0610",
+      "name": "KOTA JAMBI"
+    },
+    "kota sungai penuh": {
+      "id": "0611",
+      "name": "KOTA SUNGAI PENUH"
+    },
+    "kab. bengkulu selatan": {
+      "id": "0701",
+      "name": "KAB. BENGKULU SELATAN"
+    },
+    "kab. bengkulu tengah": {
+      "id": "0702",
+      "name": "KAB. BENGKULU TENGAH"
+    },
+    "kab. bengkulu utara": {
+      "id": "0703",
+      "name": "KAB. BENGKULU UTARA"
+    },
+    "kab. kaur": {
+      "id": "0704",
+      "name": "KAB. KAUR"
+    },
+    "kab. kepahiang": {
+      "id": "0705",
+      "name": "KAB. KEPAHIANG"
+    },
+    "kab. lebong": {
+      "id": "0706",
+      "name": "KAB. LEBONG"
+    },
+    "kab. mukomuko": {
+      "id": "0707",
+      "name": "KAB. MUKOMUKO"
+    },
+    "kab. rejang lebong": {
+      "id": "0708",
+      "name": "KAB. REJANG LEBONG"
+    },
+    "kab. seluma": {
+      "id": "0709",
+      "name": "KAB. SELUMA"
+    },
+    "kota bengkulu": {
+      "id": "0710",
+      "name": "KOTA BENGKULU"
+    },
+    "kab. banyuasin": {
+      "id": "0801",
+      "name": "KAB. BANYUASIN"
+    },
+    "kab. empat lawang": {
+      "id": "0802",
+      "name": "KAB. EMPAT LAWANG"
+    },
+    "kab. lahat": {
+      "id": "0803",
+      "name": "KAB. LAHAT"
+    },
+    "kab. muara enim": {
+      "id": "0804",
+      "name": "KAB. MUARA ENIM"
+    },
+    "kab. musi banyuasin": {
+      "id": "0805",
+      "name": "KAB. MUSI BANYUASIN"
+    },
+    "kab. musi rawas": {
+      "id": "0806",
+      "name": "KAB. MUSI RAWAS"
+    },
+    "kab. musi rawas utara": {
+      "id": "0807",
+      "name": "KAB. MUSI RAWAS UTARA"
+    },
+    "kab. ogan ilir": {
+      "id": "0808",
+      "name": "KAB. OGAN ILIR"
+    },
+    "kab. ogan komering ilir": {
+      "id": "0809",
+      "name": "KAB. OGAN KOMERING ILIR"
+    },
+    "kab. ogan komering ulu": {
+      "id": "0810",
+      "name": "KAB. OGAN KOMERING ULU"
+    },
+    "kab. ogan komering ulu selatan": {
+      "id": "0811",
+      "name": "KAB. OGAN KOMERING ULU SELATAN"
+    },
+    "kab. ogan komering ulu timur": {
+      "id": "0812",
+      "name": "KAB. OGAN KOMERING ULU TIMUR"
+    },
+    "kab. penukal abab lematang ilir": {
+      "id": "0813",
+      "name": "KAB. PENUKAL ABAB LEMATANG ILIR"
+    },
+    "kota lubuklinggau": {
+      "id": "0814",
+      "name": "KOTA LUBUKLINGGAU"
+    },
+    "kota pagar alam": {
+      "id": "0815",
+      "name": "KOTA PAGAR ALAM"
+    },
+    "kota palembang": {
+      "id": "0816",
+      "name": "KOTA PALEMBANG"
+    },
+    "kota prabumulih": {
+      "id": "0817",
+      "name": "KOTA PRABUMULIH"
+    },
+    "kab. bangka": {
+      "id": "0901",
+      "name": "KAB. BANGKA"
+    },
+    "kab. bangka barat": {
+      "id": "0902",
+      "name": "KAB. BANGKA BARAT"
+    },
+    "kab. bangka selatan": {
+      "id": "0903",
+      "name": "KAB. BANGKA SELATAN"
+    },
+    "kab. bangka tengah": {
+      "id": "0904",
+      "name": "KAB. BANGKA TENGAH"
+    },
+    "kab. belitung": {
+      "id": "0905",
+      "name": "KAB. BELITUNG"
+    },
+    "kab. belitung timur": {
+      "id": "0906",
+      "name": "KAB. BELITUNG TIMUR"
+    },
+    "kota pangkal pinang": {
+      "id": "0907",
+      "name": "KOTA PANGKAL PINANG"
+    },
+    "jakarta": {
+      "id": "1301",
+      "name": "KOTA JAKARTA"
+    },
+    "bandung": {
+      "id": "1201",
+      "name": "KAB. BANDUNG"
+    },
+    "surabaya": {
+      "id": "1638",
+      "name": "KOTA SURABAYA"
+    },
+    "semarang": {
+      "id": "1423",
+      "name": "KAB. SEMARANG"
+    },
+    "medan": {
+      "id": "1217",
+      "name": "KAB. SUMEDANG"
+    },
+    "makassar": {
+      "id": "2622",
+      "name": "KOTA MAKASSAR"
+    },
+    "depok": {
+      "id": "1225",
+      "name": "KOTA DEPOK"
+    },
+    "bogor": {
+      "id": "1204",
+      "name": "KAB. BOGOR"
+    },
+    "tangerang": {
+      "id": "1104",
+      "name": "KAB. TANGERANG"
+    },
+    "bekasi": {
+      "id": "1203",
+      "name": "KAB. BEKASI"
+    },
+    "yogyakarta": {
+      "id": "1505",
+      "name": "KOTA YOGYAKARTA"
+    },
+    "banyumas": {
+      "id": "1402",
+      "name": "KAB. BANYUMAS"
+    }
+  },
+  "regions": {}
+}

@@ -126,14 +126,75 @@ def get_subscribers(subscription_type):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
-    cursor.execute('''
-    SELECT u.user_id, u.chat_id, s.city, s.country
-    FROM subscriptions s
-    JOIN users u ON s.user_id = u.user_id
-    WHERE s.subscription_type = ? AND s.active = 1
-    ''', (subscription_type,))
+    # Check if city_id column exists
+    cursor.execute("PRAGMA table_info(subscriptions)")
+    columns = cursor.fetchall()
+    column_names = [col[1] for col in columns]
+    
+    if 'city_id' in column_names:
+        cursor.execute('''
+        SELECT u.user_id, u.chat_id, s.city, s.country, s.city_id
+        FROM subscriptions s
+        JOIN users u ON s.user_id = u.user_id
+        WHERE s.subscription_type = ? AND s.active = 1
+        ''', (subscription_type,))
+    else:
+        cursor.execute('''
+        SELECT u.user_id, u.chat_id, s.city, s.country, NULL
+        FROM subscriptions s
+        JOIN users u ON s.user_id = u.user_id
+        WHERE s.subscription_type = ? AND s.active = 1
+        ''', (subscription_type,))
     
     subscribers = cursor.fetchall()
     conn.close()
     
     return subscribers
+
+def update_prayer_subscription(user_id, city, country, city_id=None):
+    """Update prayer subscription for a user."""
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    
+    # Check if we need to add a city_id column (for legacy compatibility)
+    cursor.execute("PRAGMA table_info(subscriptions)")
+    columns = cursor.fetchall()
+    column_names = [col[1] for col in columns]
+    
+    # Add city_id column if it doesn't exist
+    if 'city_id' not in column_names:
+        cursor.execute('ALTER TABLE subscriptions ADD COLUMN city_id TEXT')
+        conn.commit()
+        print("Added city_id column to subscriptions table")
+    
+    # Check if user has existing active prayer subscription
+    cursor.execute('''
+    SELECT id FROM subscriptions
+    WHERE user_id = ? AND subscription_type = 'prayer' AND active = 1
+    ''', (user_id,))
+    
+    subscription = cursor.fetchone()
+    
+    if subscription:
+        # Update existing subscription
+        cursor.execute('''
+        UPDATE subscriptions
+        SET city = ?, country = ?, city_id = ?
+        WHERE user_id = ? AND subscription_type = 'prayer' AND active = 1
+        ''', (city, country, city_id, user_id))
+        
+        # Return update status
+        result = "updated"
+    else:
+        # Create new subscription
+        cursor.execute('''
+        INSERT INTO subscriptions (user_id, subscription_type, city, country, city_id)
+        VALUES (?, ?, ?, ?, ?)
+        ''', (user_id, "prayer", city, country, city_id))
+        
+        # Return create status
+        result = "created"
+    
+    conn.commit()
+    conn.close()
+    return result
