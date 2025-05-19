@@ -1,11 +1,10 @@
 import aiohttp
 from datetime import datetime
-from config.config import MUSLIM_API_BASE_URL, MYQURAN_API_BASE_URL
+from config.config import MYQURAN_API_BASE_URL
 
 class CalendarService:
     def __init__(self):
         # Gunakan base URL dari myQuran API
-        self.api_url = MUSLIM_API_BASE_URL
         self.myquran_api_url = MYQURAN_API_BASE_URL
     
     async def get_hijri_date(self):
@@ -232,7 +231,7 @@ class CalendarService:
     
     async def is_special_day(self, day, month, year):
         """
-        Memeriksa apakah tanggal tertentu merupakan hari khusus Islam
+        Memeriksa apakah tanggal tertentu merupakan hari khusus Islam menggunakan data lokal
         
         Args:
             day: Hari (1-31)
@@ -243,15 +242,34 @@ class CalendarService:
             Dictionary berisi informasi hari khusus
         """
         try:
+            # Konversi tanggal ke format YYYY-MM-DD
+            date_str = f"{year}-{month:02d}-{day:02d}"
+            
+            # Menggunakan metode Hijriah API MyQuran untuk mendapatkan tanggal Hijriah
             async with aiohttp.ClientSession() as session:
-                async with session.get(f"{self.api_url}/hijri/is-special-day?d={day}&m={month}&y={year}") as response:
+                async with session.get(f"{self.myquran_api_url}/cal/hijr/{date_str}/adj=-1") as response:
                     if response.status == 200:
                         data = await response.json()
                         if data['status'] == True:
-                            return {
-                                'status': 'success',
-                                'data': data['data']
-                            }
+                            # Dapatkan data Hijriah
+                            hijri_day = data['data']['num'][4]  # tanggal Hijriah
+                            hijri_month = data['data']['num'][5]  # bulan Hijriah
+                            
+                            # Periksa hari-hari khusus yang umum
+                            is_special = self._check_common_special_days(hijri_day, hijri_month)
+                            
+                            if is_special:
+                                return {
+                                    'status': 'success',
+                                    'data': is_special
+                                }
+                            else:
+                                return {
+                                    'status': 'success',
+                                    'data': {
+                                        'is_special_day': False
+                                    }
+                                }
                         else:
                             return {'status': 'error', 'message': 'Gagal memeriksa hari khusus'}
                     else:
@@ -273,23 +291,80 @@ class CalendarService:
             today_result = await self.get_hijri_date()
             if today_result['status'] == 'error':
                 return today_result
-            year = today_result['data']['year']
+            if isinstance(today_result['data']['year'], str):
+                year = int(today_result['data']['year'].replace(' H', ''))
+            else:
+                year = today_result['data']['year']
             
         try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(f"{self.api_url}/hijri/special-day/{year}") as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        if data['status'] == True:
-                            return {
-                                'status': 'success',
-                                'data': data['data'],
-                                'year': year
-                            }
-                        else:
-                            return {'status': 'error', 'message': 'Gagal mendapatkan hari-hari khusus Islam'}
-                    else:
-                        return {'status': 'error', 'message': f'HTTP error: {response.status}'}
+            # Daftar bulan Hijriah
+            hijri_months = ['', 'Muharram', 'Safar', 'Rabiul Awal', 'Rabiul Akhir', 
+                           'Jumadil Awal', 'Jumadil Akhir', 'Rajab', 'Sya\'ban', 
+                           'Ramadhan', 'Syawal', 'Dzulqaidah', 'Dzulhijjah']
+            
+            # Daftar hari-hari khusus Islam
+            special_days = [
+                {
+                    'date': f'1 {hijri_months[1]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Tahun Baru Hijriah',
+                    'description': 'Awal tahun dalam kalender Islam'
+                },
+                {
+                    'date': f'10 {hijri_months[1]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Hari Asyura',
+                    'description': 'Hari di mana banyak peristiwa penting terjadi dalam sejarah Islam'
+                },
+                {
+                    'date': f'12 {hijri_months[3]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Maulid Nabi Muhammad SAW',
+                    'description': 'Peringatan kelahiran Nabi Muhammad SAW'
+                },
+                {
+                    'date': f'27 {hijri_months[7]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Isra Miraj',
+                    'description': 'Peringatan perjalanan Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsa dan naik ke Sidratul Muntaha'
+                },
+                {
+                    'date': f'1 {hijri_months[9]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Awal Ramadhan',
+                    'description': 'Awal bulan puasa Ramadhan'
+                },
+                {
+                    'date': f'17 {hijri_months[9]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Nuzulul Quran',
+                    'description': 'Hari diturunkannya Al-Quran'
+                },
+                {
+                    'date': f'21 {hijri_months[9]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Lailatul Qadar (kemungkinan)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                },
+                {
+                    'date': f'1 {hijri_months[10]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Idul Fitri',
+                    'description': 'Hari Raya Idul Fitri'
+                },
+                {
+                    'date': f'10 {hijri_months[12]} {year}',
+                    'gregorian_date': 'Bervariasi',
+                    'name': 'Idul Adha',
+                    'description': 'Hari Raya Idul Adha'
+                }
+            ]
+            
+            return {
+                'status': 'success',
+                'data': special_days,
+                'year': year
+            }
         except Exception as e:
             return {'status': 'error', 'message': str(e)}
     
@@ -454,3 +529,121 @@ class CalendarService:
         }
         
         return day_mapping.get(indonesian_day, indonesian_day)
+
+    def _check_common_special_days(self, hijri_day, hijri_month):
+        """
+        Memeriksa apakah tanggal Hijriah merupakan hari khusus Islam yang umum
+        
+        Args:
+            hijri_day: Tanggal Hijriah
+            hijri_month: Bulan Hijriah
+            
+        Returns:
+            Dictionary berisi informasi hari khusus atau None jika bukan hari khusus
+        """
+        special_days = {
+            # Bulan Ramadhan
+            (1, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Awal Ramadhan',
+                    'description': 'Awal bulan puasa Ramadhan'
+                }
+            },
+            # Nuzulul Quran
+            (17, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Nuzulul Quran',
+                    'description': 'Hari diturunkannya Al-Quran'
+                }
+            },
+            # Lailatul Qadar
+            (21, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Lailatul Qadar (kemungkinan malam ke-1)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                }
+            },
+            (23, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Lailatul Qadar (kemungkinan malam ke-2)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                }
+            },
+            (25, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Lailatul Qadar (kemungkinan malam ke-3)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                }
+            },
+            (27, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Lailatul Qadar (kemungkinan malam ke-4)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                }
+            },
+            (29, 9): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Lailatul Qadar (kemungkinan malam ke-5)',
+                    'description': 'Malam yang lebih baik dari 1000 bulan'
+                }
+            },
+            # Idul Fitri
+            (1, 10): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Idul Fitri',
+                    'description': 'Hari Raya Idul Fitri'
+                }
+            },
+            # Idul Adha
+            (10, 12): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Idul Adha',
+                    'description': 'Hari Raya Idul Adha'
+                }
+            },
+            # Tahun Baru Hijriah
+            (1, 1): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Tahun Baru Hijriah',
+                    'description': 'Awal tahun dalam kalender Islam'
+                }
+            },
+            # Hari Asyura
+            (10, 1): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Hari Asyura',
+                    'description': 'Hari di mana banyak peristiwa penting terjadi dalam sejarah Islam'
+                }
+            },
+            # Maulid Nabi Muhammad SAW
+            (12, 3): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Maulid Nabi Muhammad SAW',
+                    'description': 'Peringatan kelahiran Nabi Muhammad SAW'
+                }
+            },
+            # Isra Miraj
+            (27, 7): {
+                'is_special_day': True,
+                'special_day': {
+                    'name': 'Isra Miraj',
+                    'description': 'Peringatan perjalanan Nabi Muhammad SAW dari Masjidil Haram ke Masjidil Aqsa dan naik ke Sidratul Muntaha'
+                }
+            }
+        }
+        
+        # Periksa apakah tanggal dan bulan cocok dengan hari khusus
+        key = (hijri_day, hijri_month)
+        return special_days.get(key)
