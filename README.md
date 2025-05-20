@@ -13,7 +13,9 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 
 - Dapatkan jadwal sholat untuk kota manapun di Indonesia
 - Pencarian lokasi cerdas dengan AI untuk menemukan kota berdasarkan daerah/wilayah
-- Berlangganan pengingat waktu sholat harian
+- Berlangganan pengingat waktu sholat harian dengan sistem notifikasi ganda:
+  - Notifikasi persiapan 10 menit sebelum waktu sholat
+  - Notifikasi tepat saat waktu sholat tiba
 - Data akurat dari MyQuran API
 
 ### 📖 Al-Quran
@@ -24,7 +26,10 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 
 ### 📅 Kalender Hijriah
 
-- Informasi kalender Hijriah
+- Informasi kalender Hijriah hari ini
+- Konversi tanggal Masehi ke Hijriah dengan input fleksibel
+- Informasi tentang bulan-bulan dalam kalender Hijriah
+- Penggunaan teknologi AI untuk memahami input pengguna dalam berbagai format
 
 ### 🤲 Doa-doa
 
@@ -49,7 +54,7 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 3. Ketik `/help` untuk melihat panduan penggunaan lengkap
 4. Gunakan perintah yang tersedia atau tanyakan pertanyaan langsung
 
-### Perintah Dasar:
+### Perintah Dasar
 
 - `/start` - Memulai bot
 - `/help` - Menampilkan panduan penggunaan
@@ -58,9 +63,12 @@ Islamic Agent adalah bot Telegram yang dirancang untuk menjadi asisten virtual I
 - `/cari_ayat [kata kunci]` - Pencarian ayat Al-Quran
 - `/doa [judul]` - Menemukan doa berdasarkan judul
 - `/kalender` - Melihat tanggal Hijriah hari ini
-- `/bulan [nomor_bulan] [tahun]` - Informasi bulan Hijriah
+- `/hijriyah` - Kalender Hijriah cerdas (menerima berbagai format input)
 - `/motivasi` - Mendapatkan kata motivasi Islami acak
 - `/motivasi_harian` - Kata motivasi Islami hari ini
+- `/subscribe` - Berlangganan notifikasi (sholat/motivasi)
+- `/unsubscribe` - Berhenti berlangganan notifikasi
+- `/my_subscriptions` - Melihat langganan aktif Anda
 
 ## 🔧 Instalasi dan Pengembangan
 
@@ -79,19 +87,30 @@ git clone https://github.com/ridhoarmand/islamic-agent.git
 cd islamic-agent
 ```
 
-2. Instal dependensi:
+2. Buat dan aktifkan virtual environment (direkomendasikan):
+
+```bash
+# Pada Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Pada macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. Instal dependensi:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Copy contoh .env
+4. Siapkan file konfigurasi:
 
 ```bash
 cp .env.example .env
+# Sesuaikan konfigurasi di .env dengan API keys yang diperlukan
 ```
-
-4. Sesuaikan konfigurasi di `.env`
 
 5. Jalankan bot:
 
@@ -101,7 +120,7 @@ python main.py
 
 ## 📦 Struktur Proyek
 
-```
+```text
 islamic-agent/
 ├── main.py                  # Entry point aplikasi
 ├── config/                  # Konfigurasi

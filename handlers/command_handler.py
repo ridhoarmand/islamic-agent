@@ -89,8 +89,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     await update.message.reply_text(welcome_message, parse_mode='Markdown')
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send a message when the command /help is issued."""
-    # Bagian 1: Perintah Dasar dan Jadwal Sholat
+    """Send a message when the command /help is issued."""    # Bagian 1: Perintah Dasar dan Jadwal Sholat
     help_text_part1 = (
         "📚 *Panduan Penggunaan Islamic Agent (1/3)*\n\n"
         "🔹 *Perintah Dasar:*\n"
@@ -99,15 +98,17 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         
         "🔹 *Jadwal Sholat:*\n"
         "/sholat [kota/daerah] - Mendapatkan jadwal sholat\n"
-        "Contoh: /sholat Jakarta, /sholat 1301 (ID kota), /sholat Cisarua\n"
+        "Contoh: /sholat Jakarta, /sholat Purwokerto\n"
         "Bot akan cerdas mengenali kota terdekat dari daerah yang Anda sebutkan\n\n"
         
         "🔹 *Kalender Hijriah:*\n"
         "/kalender - Melihat tanggal Hijriah hari ini\n"
-        "/bulan [nomor_bulan] [tahun] - Informasi bulan Hijriah\n"
-        "Contoh: /bulan 9 untuk bulan Ramadhan\n"
-        "/konversi\\_tanggal <tanggal> <bulan> <tahun> - Konversi tanggal Masehi ke Hijriah\n"
-        "Contoh: /konversi\\_tanggal 17 8 1945\n"
+        "/hijriyah - Perintah cerdas untuk kalender Hijriah (menerima berbagai format input)\n"
+        "Contoh:\n"
+        "- /hijriyah (tanggal Hijriah hari ini)\n"
+        "- /hijriyah bulan (bulan Hijriah saat ini)\n"
+        "- /hijriyah 9 (informasi bulan Ramadan)\n"
+        "- /hijriyah 17 8 1945 (konversi tanggal Masehi ke Hijriah)\n"
     )
     
     # Bagian 2: Al-Quran dan Doa - DIPERBARUI
@@ -745,28 +746,233 @@ async def test_notification_command(update: Update, context: ContextTypes.DEFAUL
         "Mengirim pesan notifikasi uji untuk memverifikasi bahwa sistem notifikasi berfungsi dengan benar.\n"
         "Tunggu sebentar...",
         parse_mode='Markdown'
-    )
-    
-    # Get the scheduler service
+    )    # Get the scheduler service
     from services.scheduler_service import SchedulerService
     scheduler = SchedulerService()
     
-    # Send test notification
-    success = scheduler.test_notification(chat_id)
-    
-    if success:
+    try:
+        # Send test notification - properly await the async method
+        success = await scheduler.test_notification(chat_id)
+        
+        if success:
+            await update.message.reply_text(
+                "✅ *Sistem Notifikasi Berfungsi!*\n\n"
+                "Pesan notifikasi uji berhasil dikirim. Sistem notifikasi Anda berfungsi dengan benar.\n\n"
+                "ℹ️ Ini mengonfirmasi bahwa:\n"
+                "• Bot dapat mengirim pesan notifikasi\n"
+                "• Koneksi Telegram berfungsi normal\n"
+                "• Scheduler aktif dan berjalan",
+                parse_mode='Markdown'
+            )
+        else:
+            await update.message.reply_text(
+                "❌ *Kesalahan Sistem Notifikasi*\n\n"
+                "Terjadi masalah saat mengirim notifikasi uji. Silakan periksa log untuk detail lebih lanjut.",
+                parse_mode='Markdown'
+            )
+    except Exception as e:
         await update.message.reply_text(
-            "✅ *Sistem Notifikasi Berfungsi!*\n\n"
-            "Pesan notifikasi uji berhasil dikirim. Sistem notifikasi Anda berfungsi dengan benar.\n\n"
-            "ℹ️ Ini mengonfirmasi bahwa:\n"
-            "• Bot dapat mengirim pesan notifikasi\n"
-            "• Koneksi Telegram berfungsi normal\n"
-            "• Scheduler aktif dan berjalan",
+            f"❌ *Kesalahan Sistem Notifikasi*\n\n"
+            f"Terjadi kesalahan: {str(e)}\n\n"
+            f"Silakan periksa log untuk detail lebih lanjut.",
             parse_mode='Markdown'
+        )
+
+async def hijriyah_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """
+    Handle the /hijriyah command for converting dates or getting calendar info.
+    This command intelligently processes different input formats from users.
+    """
+    user = update.effective_user
+    save_user(user.id, user.first_name, user.last_name, user.username, update.effective_chat.id)
+    
+    args = context.args
+    
+    if not args:
+        # If no arguments provided, show current Hijri date
+        await update.message.reply_text("Mengambil informasi tanggal Hijriah hari ini...")
+        calendar_info = await calendar_service.get_hijri_date()
+        if calendar_info['status'] == 'success':
+            data = calendar_info['data']
+            hijri_day = data['day']
+            hijri_month = data['month']['indonesian']
+            hijri_year = data['year']
+            hijri_weekday = data['weekday']['indonesian']
+            
+            response = (
+                f"🗓️ *Tanggal Hijriah Hari Ini*\n\n"
+                f"📆 *{hijri_day} {hijri_month} {hijri_year} H*\n"
+                f"🔹 Hari: {hijri_weekday}\n\n"
+                f"Gunakan format berikut untuk opsi lain:\n"
+                f"• `/hijriyah bulan` - Informasi bulan Hijriah saat ini\n"
+                f"• `/hijriyah [nomor bulan]` - Info bulan tertentu (misal: 9 untuk Ramadan)\n"
+                f"• `/hijriyah [DD MM YYYY]` - Konversi tanggal Masehi ke Hijriah\n"
+                f"• `/hijriyah [tanggal] [bulan] [tahun]` - Format lain untuk konversi"
+            )
+            await update.message.reply_text(response, parse_mode='Markdown')
+        else:
+            await update.message.reply_text(f"Maaf, terjadi kesalahan: {calendar_info['message']}")
+        return
+
+    # Process input with Gemini to determine intent
+    user_input = " ".join(args)
+    
+    # Try to determine if the user is asking about a specific month
+    if len(args) == 1 and args[0].lower() == "bulan":
+        # User wants information about the current Hijri month
+        await handle_hijri_month(update, None, None)
+        return
+        
+    try:
+    # Check if the first argument is a number and the only argument - it's a month number
+        if len(args) == 1 and args[0].isdigit():
+            month = int(args[0])
+            if 1 <= month <= 12:
+                # User is asking for a specific month in the current year
+                await handle_hijri_month(update, month, None)
+                returnmonth = int(args[0])
+            if 1 <= month <= 12:
+                # User is asking for a specific month in the current year
+                await handle_hijri_month(update, month, None)
+                return
+        
+        # Check if we have month and year (2 arguments, both numbers)
+        if len(args) == 2 and args[0].isdigit() and args[1].isdigit():
+            month = int(args[0])
+            year = int(args[1])
+            if 1 <= month <= 12:
+                # User specified month and year
+                await handle_hijri_month(update, month, year)
+                return
+                
+        # Try to parse as a date conversion (could be DD MM YYYY format)
+        # Possible formats: "20 5 2023", "20 mei 2023", "mei 20 2023", etc.
+        
+        # Normalize month names to numbers if needed
+        month_names = {
+            "januari": 1, "jan": 1, "february": 2, "feb": 2, "maret": 3, "mar": 3,
+            "april": 4, "apr": 4, "mei": 5, "may": 5, "juni": 6, "jun": 6,
+            "juli": 7, "jul": 7, "agustus": 8, "aug": 8, "agt": 8, "september": 9,
+            "sept": 9, "sep": 9, "oktober": 10, "oct": 10, "okt": 10, "november": 11,
+            "nov": 11, "desember": 12, "dec": 12, "des": 12
+        }
+        
+        # Create a copy of args to work with
+        processed_args = args.copy()
+        
+        # Try to normalize month names to numbers
+        for i, arg in enumerate(processed_args):
+            if arg.lower() in month_names:
+                processed_args[i] = str(month_names[arg.lower()])
+                
+        # Now try to extract day, month, year
+        day, month, year = None, None, None
+        
+        # Case 1: Three arguments that are all digits (DD MM YYYY)
+        if len(processed_args) == 3 and all(arg.isdigit() for arg in processed_args):
+            day = int(processed_args[0])
+            month = int(processed_args[1])
+            year = int(processed_args[2])
+            
+            # Handle two-digit year (assuming 20xx for years < 30, 19xx otherwise)
+            if year < 100:
+                year = 2000 + year if year < 30 else 1900 + year
+                
+        # If we successfully parsed date components
+        if day is not None and month is not None and year is not None:
+            # Validate date
+            if 1 <= day <= 31 and 1 <= month <= 12 and 1900 <= year <= 2100:
+                await handle_date_conversion(update, day, month, year)
+                return
+    except Exception as e:
+        # If we get here, we couldn't parse the input properly
+        pass
+    
+    # Use Gemini to interpret the user's input
+    interpretation_prompt = f"""
+    Bantu saya memahami input ini untuk konversi tanggal: "{user_input}"
+    
+    Ini bisa berupa:
+    1. Bulan Hijriah tertentu (seperti "ramadan" atau "9")
+    2. Tanggal Masehi untuk dikonversi ke Hijriah (seperti "20 mei 2023")
+    
+    Berikan jawaban dalam format JSON:
+    {{
+      "type": "month" or "date",
+      "month": [nomor bulan 1-12] (jika bertipe month),
+      "year": [tahun] (opsional, jika disebutkan),
+      "day": [tanggal] (jika bertipe date),
+      "month": [bulan 1-12] (jika bertipe date),
+      "year": [tahun] (jika bertipe date)
+    }}
+    """
+    
+    try:
+        interpretation_result = await gemini_service.generate_text(interpretation_prompt)
+        import json
+        result = json.loads(interpretation_result)
+        
+        if result.get("type") == "month":
+            month = result.get("month")
+            year = result.get("year")
+            if month and 1 <= month <= 12:
+                await handle_hijri_month(update, month, year)
+                return
+        elif result.get("type") == "date":
+            day = result.get("day")
+            month = result.get("month")
+            year = result.get("year")
+            if day and month and year:
+                if 1 <= day <= 31 and 1 <= month <= 12 and 1900 <= year <= 2100:
+                    await handle_date_conversion(update, day, month, year)
+                    return
+    except Exception as e:
+        # Failed to interpret with Gemini
+        pass
+    
+    # If all else fails, show help message
+    help_message = (
+        "📅 *Informasi Tanggal Hijriah*\n\n"
+        "Format penggunaan `/hijriyah`:\n"
+        "• `/hijriyah` - Tanggal Hijriah hari ini\n"
+        "• `/hijriyah bulan` - Informasi bulan Hijriah saat ini\n" 
+        "• `/hijriyah [nomor bulan]` - Informasi bulan tertentu (contoh: `/hijriyah 9` untuk Ramadan)\n"
+        "• `/hijriyah [nomor bulan] [tahun]` - Informasi bulan tertentu di tahun tertentu\n"
+        "• `/hijriyah [tanggal] [bulan] [tahun]` - Konversi tanggal Masehi ke Hijriah\n\n"
+        "Contoh: `/hijriyah 17 8 1945` atau `/hijriyah 20 mei 2023`"
+    )
+    await update.message.reply_text(help_message, parse_mode='Markdown')
+
+async def handle_hijri_month(update: Update, month=None, year=None):
+    """Helper function to handle Hijri month information requests."""
+    await update.message.reply_text("Mengambil informasi bulan Hijriah...")
+    
+    monthly_info = await calendar_service.get_hijri_calendar(month, year)
+    formatted_monthly_info = calendar_service.format_monthly_info(monthly_info)
+    
+    await update.message.reply_text(formatted_monthly_info, parse_mode='Markdown')
+
+async def handle_date_conversion(update: Update, day, month, year):
+    """Helper function to handle date conversion requests."""
+    await update.message.reply_text(f"Mengkonversi tanggal {day}/{month}/{year} ke tanggal Hijriah...")
+    
+    # Call the calendar service to convert the date
+    result = await calendar_service.convert_to_hijri(day, month, year)
+    
+    if result['status'] == 'success':
+        data = result['data']
+        hijri_day = data['day']
+        hijri_month = data['month']['indonesian']
+        hijri_year = data['year']
+        hijri_weekday = data['weekday']['indonesian']
+        
+        response = (
+            f"🗓️ *Hasil Konversi Tanggal*\n\n"
+            f"📆 *Tanggal Masehi:* {day}/{month}/{year}\n"
+            f"📆 *Tanggal Hijriah:* {hijri_day} {hijri_month} {hijri_year} H\n"
+            f"🔹 Hari: {hijri_weekday}"
         )
     else:
-        await update.message.reply_text(
-            "❌ *Kesalahan Sistem Notifikasi*\n\n"
-            "Terjadi masalah saat mengirim notifikasi uji. Silakan periksa log untuk detail lebih lanjut.",
-            parse_mode='Markdown'
-        )
+        response = f"Maaf, terjadi kesalahan: {result['message']}"
+    
+    await update.message.reply_text(response, parse_mode='Markdown')

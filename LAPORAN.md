@@ -59,6 +59,8 @@
       - [5.1.4 Fitur Doa-doa](#514-fitur-doa-doa)
       - [5.1.5 Fitur Motivasi Islami](#515-fitur-motivasi-islami)
       - [5.1.6 Fitur AI Assistant](#516-fitur-ai-assistant)
+      - [5.1.7 Sistem Notifikasi Waktu Sholat](#517-sistem-notifikasi-waktu-sholat)
+      - [5.1.8 Fitur Berlangganan (Subscribe)](#518-fitur-berlangganan-subscribe)
     - [5.2 Implementasi Database](#52-implementasi-database)
     - [5.3 Implementasi API](#53-implementasi-api)
   - [6. PENGUJIAN](#6-pengujian)
@@ -343,7 +345,9 @@ Berikut adalah diagram alur untuk beberapa fitur utama Islamic Agent:
 Implementasi fitur jadwal sholat menggunakan API Kementerian Agama RI untuk mendapatkan jadwal yang akurat. Fitur ini memungkinkan pengguna untuk:
 
 - Mendapatkan jadwal sholat harian untuk kota tertentu
-- Berlangganan notifikasi waktu sholat
+- Berlangganan notifikasi waktu sholat dengan sistem notifikasi ganda:
+  - Notifikasi persiapan 10 menit sebelum waktu sholat
+  - Notifikasi tepat saat waktu sholat tiba
 
 **Potongan kode implementasi PrayerService**:
 
@@ -414,6 +418,37 @@ Fitur kalender Hijriah menyediakan informasi tanggal dan bulan dalam kalender Hi
 - Informasi bulan Hijriah
 - Daftar hari-hari khusus Islam
 
+Dengan pembaruan terbaru, fitur ini diperkaya dengan command `/hijriyah` yang cerdas dan intuitif:
+
+- Perintah tunggal `/hijriyah` yang memahami berbagai format input
+- Kemampuan memproses input pengguna dalam bahasa alami
+- Dukungan untuk berbagai format tanggal (DD-MM-YYYY, "17 Agustus 1945", dll.)
+- Bantuan AI untuk interpretasi maksud pengguna
+
+**Implementasi command hijriyah cerdas**:
+
+```python
+async def hijriyah_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    # Tanpa argumen - tampilkan tanggal Hijriah hari ini
+    if not args:
+        # Tampilkan tanggal Hijriah saat ini
+        # ...
+        
+    # Pemrosesan berbagai format input dengan bantuan AI
+    user_input = " ".join(args)
+    
+    # Coba interpretasi sebagai bulan Hijriah
+    # ...
+    
+    # Coba interpretasi sebagai konversi tanggal
+    # ...
+    
+    # Gunakan Gemini untuk interpretasi input yang kompleks
+    # ...
+```
+
+Pendekatan ini membuat pengguna lebih mudah mengakses informasi kalender Hijriah tanpa perlu mengingat format perintah yang tepat.
+
 #### 5.1.4 Fitur Doa-doa
 
 Fitur doa-doa menyediakan koleksi doa sehari-hari dengan teks Arab, Latin, dan terjemahan Indonesia. Implementasi menggunakan data JSON lokal yang dapat diperbarui secara berkala. Fitur ini memungkinkan pengguna untuk:
@@ -437,6 +472,155 @@ Fitur AI Assistant menggunakan Google Gemini API untuk menjawab pertanyaan-perta
 - Menjelaskan konsep keagamaan
 - Konteks percakapan berkelanjutan
 - Opsi pencarian internet untuk informasi terkini
+
+### 5.1.7 Sistem Notifikasi Waktu Sholat
+
+Implementasi sistem notifikasi waktu sholat menggunakan pendekatan penjadwalan yang tepat (precise scheduling), bukan pemeriksaan interval. Sistem ini dirancang untuk memberikan pengalaman pengguna yang optimal dengan:
+
+1. **Sistem Notifikasi Ganda**:
+   - Notifikasi persiapan dikirim 10 menit sebelum waktu sholat
+   - Notifikasi aktual dikirim tepat saat waktu sholat tiba
+
+2. **Pelacakan Notifikasi yang Efisien**:
+   - Menggunakan database SQLite untuk melacak notifikasi yang telah dikirim
+   - Menyimpan tipe notifikasi ('prep' untuk persiapan, 'actual' untuk waktu sebenarnya)
+   - Mencegah notifikasi duplikat bahkan jika bot di-restart
+
+3. **Optimasi Pesan**:
+   - Pesan yang berbeda untuk notifikasi persiapan dan waktu sholat
+   - Informasi tambahan seperti kota dan waktu tersisa
+
+**Potongan kode penjadwalan notifikasi**:
+
+```python
+def _schedule_user_prayer_notifications(self, user_id, chat_id, city, country, prayer_data):
+    # ...existing code...
+    
+    for prayer, prayer_time in prayer_data['data'].items():
+        if prayer not in ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']:
+            continue
+            
+        # Convert prayer time to datetime
+        prayer_hour, prayer_minute = map(int, prayer_time.split(':'))
+        
+        # Create prayer datetime for today
+        prayer_datetime = datetime(
+            now.year, now.month, now.day, 
+            prayer_hour, prayer_minute, 0, 0, 
+            timezone
+        )
+        
+        # 1. Schedule preparation notification (10 minutes before prayer)
+        prep_notification_datetime = prayer_datetime - timedelta(minutes=PRAYER_NOTIFICATION_MINUTES)
+        
+        # ...existing code...
+        
+        # 2. Schedule actual prayer time notification
+        actual_notification_job = schedule.every().day.at(actual_notification_time).do(
+            self._send_scheduled_prayer_notification,
+            user_id=user_id,
+            chat_id=chat_id,
+            prayer=prayer,
+            prayer_time=prayer_time,
+            city=city,
+            country=country,
+            prayer_data=prayer_data,
+            notification_type='actual'
+        )
+```
+
+Pendekatan ini meningkatkan pengalaman pengguna dengan menghilangkan spam notifikasi yang disebabkan oleh pendekatan pengecekan interval sebelumnya, dan memberikan informasi yang tepat saat dibutuhkan.
+
+**Implementasi pelacakan notifikasi**:
+
+```python
+def has_sent_prayer_notification(self, user_id, prayer_name, date=None, subtype='prep'):
+    """
+    Check if a prayer notification has already been sent to a user.
+    
+    Args:
+        user_id: User ID
+        prayer_name: Name of the prayer (Fajr, Dhuhr, etc.)
+        date: Date in YYYY-MM-DD format. If None, uses today.
+        subtype: Type of notification ('prep' for preparation 10 min before, 'actual' for actual prayer time)
+        
+    Returns:
+        True if notification was already sent, False otherwise
+    """
+    if date is None:
+        timezone = pytz.timezone(TIMEZONE)
+        date = datetime.datetime.now(timezone).strftime('%Y-%m-%d')
+    
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+    SELECT id FROM notification_history 
+    WHERE user_id = ? AND notification_type = 'prayer'
+    AND prayer_name = ? AND notification_date = ? AND notification_subtype = ?
+    ''', (user_id, prayer_name, date, subtype))
+    
+    result = cursor.fetchone() is not None
+    conn.close()
+    
+    return result
+```
+
+### 5.1.8 Fitur Berlangganan (Subscribe)
+
+Fitur berlangganan memungkinkan pengguna untuk menerima notifikasi secara teratur tanpa perlu membuka bot setiap saat. Implementasi fitur ini menggunakan database SQLite untuk melacak langganan dan scheduler untuk mengirim notifikasi pada waktu yang tepat. Fitur meliputi:
+
+1. **Berlangganan Jadwal Sholat**:
+   - Pengguna dapat berlangganan notifikasi waktu sholat untuk kota tertentu
+   - Notifikasi dikirim dua kali untuk setiap waktu sholat:
+     - 10 menit sebelum waktu sholat (persiapan)
+     - Tepat pada waktu sholat
+   - Data jadwal sholat diperbarui setiap hari
+
+2. **Berlangganan Motivasi Harian**:
+   - Pengguna menerima kata-kata motivasi Islami setiap pagi
+   - Konten motivasi berganti setiap hari
+   - Motivasi disertai dengan sumber (Al-Quran atau Hadits)
+
+3. **Manajemen Langganan**:
+   - Perintah `/my_subscriptions` untuk melihat semua langganan aktif
+   - Perintah `/unsubscribe` untuk berhenti berlangganan layanan tertentu
+   - Perintah `/test_notifikasi` untuk memastikan sistem notifikasi berfungsi
+
+**Potongan kode implementasi fitur berlangganan**:
+
+```python
+async def subscribe_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Handle subscription to services like prayer times and daily quotes."""
+    user = update.effective_user
+    chat_id = update.effective_chat.id
+    args = context.args
+    
+    if not args or len(args) < 1:
+        await update.message.reply_text(
+            "🔔 *Berlangganan Layanan*\n\n"
+            "Format:\n"
+            "• `/subscribe sholat [kota]` - Berlangganan jadwal sholat\n"
+            "• `/subscribe motivasi_harian` - Berlangganan motivasi islami harian\n\n"
+            "Contoh: `/subscribe sholat Jakarta`",
+            parse_mode='Markdown'
+        )
+        return
+        
+    service_type = args[0].lower()
+    
+    # Proses berlangganan sesuai jenis layanan
+    if service_type == "sholat":
+        # Implementasi berlangganan jadwal sholat
+        # ...
+    elif service_type == "motivasi_harian":
+        # Implementasi berlangganan motivasi harian
+        # ...
+    else:
+        await update.message.reply_text(f"Layanan '{service_type}' tidak tersedia untuk berlangganan.")
+```
+
+Fitur berlangganan ini menjadi salah satu fitur utama yang meningkatkan keterlibatan pengguna dengan bot secara berkelanjutan.
 
 ### 5.2 Implementasi Database
 

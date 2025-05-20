@@ -526,21 +526,15 @@ class SchedulerService:
         else:
             return "stopped"
     
-    def test_notification(self, chat_id):
+    async def test_notification(self, chat_id):
         """Send a test notification to verify bot can send messages."""
-        asyncio.set_event_loop(asyncio.new_event_loop())
-        loop = asyncio.get_event_loop()
-        
-        async def send_test():
-            try:
-                await self.bot.send_message(
-                    chat_id=chat_id,
-                    text="🧪 *Test Notification*\n\nJika Anda menerima pesan ini, berarti notifikasi bot berfungsi dengan benar.",
-                    parse_mode='Markdown'
-                )
-                return True
-            except Exception as e:
-                logger.error(f"Error sending test notification: {str(e)}", exc_info=True)
-                return False
-                
-        return loop.run_until_complete(send_test())
+        try:
+            await self.bot.send_message(
+                chat_id=chat_id,
+                text="🧪 *Test Notification*\n\nJika Anda menerima pesan ini, berarti notifikasi bot berfungsi dengan benar.",
+                parse_mode='Markdown'
+            )
+            return True
+        except Exception as e:
+            logger.error(f"Error sending test notification: {str(e)}", exc_info=True)
+            return False

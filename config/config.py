@@ -10,6 +10,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # Gemini API Configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = "gemini-2.0-flash"  # Model Gemini yang digunakan
 
 # SERP API Configuration
 SERP_API_KEY = os.getenv("SERP_API_KEY")

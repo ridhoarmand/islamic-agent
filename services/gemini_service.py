@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from config.config import GEMINI_API_KEY, SHOW_THINKING_PROCESS
+from config.config import GEMINI_API_KEY, SHOW_THINKING_PROCESS, GEMINI_MODEL
 from services.mcp_service import MCPService
 
 # Configure the Gemini API
@@ -7,7 +7,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 class GeminiService:
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel(GEMINI_MODEL)
         self.mcp_service = MCPService()
         self.show_thinking = SHOW_THINKING_PROCESS
     
