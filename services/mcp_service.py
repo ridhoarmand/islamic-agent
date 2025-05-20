@@ -1,7 +1,5 @@
-import json
 import os
 import random
-import aiohttp
 from pathlib import Path
 from config.config import SERP_API_KEY
 

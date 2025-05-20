@@ -1,9 +1,17 @@
 import sqlite3
 import os
-from config.config import DATABASE_PATH
+import datetime
+import pytz
+from config.config import DATABASE_PATH, TIMEZONE
 
 # Ensure data directory exists
 os.makedirs(os.path.dirname(DATABASE_PATH), exist_ok=True)
+
+# Helper function untuk mendapatkan waktu saat ini dengan timezone yang benar
+def get_current_datetime():
+    """Get current datetime with the correct timezone"""
+    timezone = pytz.timezone(TIMEZONE)
+    return datetime.datetime.now(timezone)
 
 def init_db():
     """Initialize the database with required tables."""
@@ -57,10 +65,12 @@ def save_user(user_id, first_name, last_name, username, chat_id):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
+    current_time = get_current_datetime().strftime('%Y-%m-%d %H:%M:%S')
+    
     cursor.execute('''
-    INSERT OR REPLACE INTO users (user_id, first_name, last_name, username, chat_id)
-    VALUES (?, ?, ?, ?, ?)
-    ''', (user_id, first_name, last_name, username, chat_id))
+    INSERT OR REPLACE INTO users (user_id, first_name, last_name, username, chat_id, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ''', (user_id, first_name, last_name, username, chat_id, current_time))
     
     conn.commit()
     conn.close()
@@ -70,10 +80,12 @@ def save_chat_history(user_id, message, response):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
+    current_time = get_current_datetime().strftime('%Y-%m-%d %H:%M:%S')
+    
     cursor.execute('''
-    INSERT INTO chat_history (user_id, message, response)
-    VALUES (?, ?, ?)
-    ''', (user_id, message, response))
+    INSERT INTO chat_history (user_id, message, response, timestamp)
+    VALUES (?, ?, ?, ?)
+    ''', (user_id, message, response, current_time))
     
     conn.commit()
     conn.close()
@@ -99,10 +111,12 @@ def subscribe_to_service(user_id, subscription_type, city=None, country=None):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
+    current_time = get_current_datetime().strftime('%Y-%m-%d %H:%M:%S')
+    
     cursor.execute('''
-    INSERT INTO subscriptions (user_id, subscription_type, city, country)
-    VALUES (?, ?, ?, ?)
-    ''', (user_id, subscription_type, city, country))
+    INSERT INTO subscriptions (user_id, subscription_type, city, country, created_at)
+    VALUES (?, ?, ?, ?, ?)
+    ''', (user_id, subscription_type, city, country, current_time))
     
     conn.commit()
     conn.close()
@@ -156,6 +170,8 @@ def update_prayer_subscription(user_id, city, country, city_id=None):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
+    current_time = get_current_datetime().strftime('%Y-%m-%d %H:%M:%S')
+    
     # Check if we need to add a city_id column (for legacy compatibility)
     cursor.execute("PRAGMA table_info(subscriptions)")
     columns = cursor.fetchall()
@@ -179,18 +195,18 @@ def update_prayer_subscription(user_id, city, country, city_id=None):
         # Update existing subscription
         cursor.execute('''
         UPDATE subscriptions
-        SET city = ?, country = ?, city_id = ?
+        SET city = ?, country = ?, city_id = ?, created_at = ?
         WHERE user_id = ? AND subscription_type = 'prayer' AND active = 1
-        ''', (city, country, city_id, user_id))
+        ''', (city, country, city_id, current_time, user_id))
         
         # Return update status
         result = "updated"
     else:
         # Create new subscription
         cursor.execute('''
-        INSERT INTO subscriptions (user_id, subscription_type, city, country, city_id)
-        VALUES (?, ?, ?, ?, ?)
-        ''', (user_id, "prayer", city, country, city_id))
+        INSERT INTO subscriptions (user_id, subscription_type, city, country, city_id, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
+        ''', (user_id, "prayer", city, country, city_id, current_time))
         
         # Return create status
         result = "created"

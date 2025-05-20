@@ -6,15 +6,22 @@ from handlers.command_handler import (
     start_command, help_command, sholat_command, quran_command, cari_ayat_command,
     doa_command, motivasi_command, motivasi_harian_command, subscribe_command, unsubscribe_command,
     kalender_command, bulan_command, konversi_tanggal_command, 
-    toggle_thinking_command, my_subscriptions_command, handle_message
+    toggle_thinking_command, my_subscriptions_command, test_notification_command, handle_message
 )
 from services.scheduler_service import SchedulerService
 from utils.database import init_db
 
+# Ensure logs directory exists
+os.makedirs("logs", exist_ok=True)
+
 # Set up logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    level=logging.INFO,
+    handlers=[
+        logging.FileHandler("logs/bot.log"),
+        logging.StreamHandler()
+    ]
 )
 logger = logging.getLogger(__name__)
 
@@ -46,6 +53,7 @@ def main():
     application.add_handler(CommandHandler("unsubscribe", unsubscribe_command))
     application.add_handler(CommandHandler("my_subscriptions", my_subscriptions_command))
     application.add_handler(CommandHandler("toggle_thinking", toggle_thinking_command))
+    application.add_handler(CommandHandler("test_notifikasi", test_notification_command))
     
     # Register message handler for chat with Gemini LLM
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))

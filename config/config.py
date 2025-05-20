@@ -25,3 +25,10 @@ SHOW_THINKING_PROCESS = False  # Set to True untuk menampilkan proses berpikir, 
 
 # App Configuration
 DEBUG = False
+
+# Timezone Configuration
+TIMEZONE = 'Asia/Jakarta'  # Zona waktu Indonesia WIB (UTC+7)
+
+# Scheduler Configuration
+DAILY_QUOTE_TIME = "08:00"   # Waktu pengiriman motivasi harian (format: "HH:MM")
+PRAYER_NOTIFICATION_MINUTES = 10  # Notifikasi dikirim X menit sebelum waktu sholat

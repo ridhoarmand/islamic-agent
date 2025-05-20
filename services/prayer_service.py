@@ -1,6 +1,4 @@
 import aiohttp
-import json
-import os
 from datetime import datetime
 from config.config import MYQURAN_API_BASE_URL
 from utils.location_finder import LocationFinder
@@ -73,7 +71,7 @@ class PrayerService:
                 if not city_id:
                     return {
                         'status': 'error', 
-                        'message': f'Kota {city} tidak ditemukan. Gunakan ID kota atau coba nama kota lain di Indonesia.'
+                        'message': f'Kota {city} tidak ditemukan. Silahkan coba nama kota lain di Indonesia.'
                     }
             
             async with aiohttp.ClientSession() as session:

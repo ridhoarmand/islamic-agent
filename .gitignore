@@ -43,3 +43,4 @@ logs/
 
 # Other
 .DS_Store
+.venv/

@@ -9,7 +9,8 @@ from services.calendar_service import CalendarService
 from utils.database import save_user, save_chat_history, get_recent_chat_history, subscribe_to_service, unsubscribe_from_service
 import re
 import sqlite3
-from config.config import DATABASE_PATH
+import pytz
+from config.config import DATABASE_PATH, TIMEZONE
 
 def sanitize_markdown(text):
     """
@@ -130,15 +131,15 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "/motivasi - Mendapatkan kata motivasi islami acak\n"
         "/motivasi\\_harian - Mendapatkan kata motivasi islami hari ini"
     )
-    
-    # Bagian 3: Berlangganan dan Tanya Jawab
+      # Bagian 3: Berlangganan dan Tanya Jawab
     help_text_part3 = (
         "📚 *Panduan Penggunaan Islamic Agent (3/3)*\n\n"
         "🔹 *Berlangganan:*\n"
         "/subscribe sholat [kota] - Berlangganan notifikasi jadwal sholat\n"
         "/subscribe motivasi\\_harian - Berlangganan kata motivasi islami harian\n"
         "/unsubscribe [layanan] - Berhenti berlangganan\n"
-        "/my\\_subscriptions - Melihat semua langganan aktif Anda\n\n"
+        "/my\\_subscriptions - Melihat semua langganan aktif Anda\n"
+        "/test\\_notifikasi - Menguji sistem notifikasi\n\n"
         
         "🔹 *Tanya Jawab:*\n"
         "Anda juga dapat mengirimkan pertanyaan langsung tentang Islam, dan saya akan mencoba menjawabnya dengan bantuan Gemini AI.\n"
@@ -713,10 +714,10 @@ async def my_subscriptions_command(update: Update, context: ContextTypes.DEFAULT
         if sub_type == "prayer":
             message += f"📌 *Jadwal Sholat*\n"
             message += f"📍 Lokasi: *{city}, {country}*\n"
-            message += f"⏰ Berlangganan sejak: {created_at}\n\n"
+            message += f"⏰ Berlangganan sejak: {created_at} (WIB)\n\n"
         elif sub_type == "daily_quote":
             message += f"📌 *Motivasi Harian*\n"
-            message += f"⏰ Berlangganan sejak: {created_at}\n\n"
+            message += f"⏰ Berlangganan sejak: {created_at} (WIB)\n\n"
     
     message += "ℹ️ *Cara Mengelola Langganan*\n"
     message += "• `/unsubscribe sholat` - Berhenti langganan jadwal sholat\n"
@@ -724,3 +725,48 @@ async def my_subscriptions_command(update: Update, context: ContextTypes.DEFAULT
     message += "• `/subscribe sholat [kota]` - Ganti lokasi jadwal sholat"
     
     await update.message.reply_text(message, parse_mode='Markdown')
+
+async def test_notification_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Test notification system by sending a test message."""
+    user = update.effective_user
+    chat_id = update.effective_chat.id
+    
+    # Save user info
+    save_user(
+        user.id, 
+        user.first_name,
+        user.last_name,
+        user.username,
+        chat_id
+    )
+    
+    await update.message.reply_text(
+        "🧪 *Pengujian Notifikasi*\n\n"
+        "Mengirim pesan notifikasi uji untuk memverifikasi bahwa sistem notifikasi berfungsi dengan benar.\n"
+        "Tunggu sebentar...",
+        parse_mode='Markdown'
+    )
+    
+    # Get the scheduler service
+    from services.scheduler_service import SchedulerService
+    scheduler = SchedulerService()
+    
+    # Send test notification
+    success = scheduler.test_notification(chat_id)
+    
+    if success:
+        await update.message.reply_text(
+            "✅ *Sistem Notifikasi Berfungsi!*\n\n"
+            "Pesan notifikasi uji berhasil dikirim. Sistem notifikasi Anda berfungsi dengan benar.\n\n"
+            "ℹ️ Ini mengonfirmasi bahwa:\n"
+            "• Bot dapat mengirim pesan notifikasi\n"
+            "• Koneksi Telegram berfungsi normal\n"
+            "• Scheduler aktif dan berjalan",
+            parse_mode='Markdown'
+        )
+    else:
+        await update.message.reply_text(
+            "❌ *Kesalahan Sistem Notifikasi*\n\n"
+            "Terjadi masalah saat mengirim notifikasi uji. Silakan periksa log untuk detail lebih lanjut.",
+            parse_mode='Markdown'
+        )
